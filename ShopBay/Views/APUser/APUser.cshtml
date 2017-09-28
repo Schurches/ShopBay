@@ -46,8 +46,10 @@
                 <div class="form-group col-sm-4">
                     <label for="categoryProduct">Category</label>
                     <select class="form-control" id="categoryProduct">
-                        <option>Computers</option>
-                        <option>Tv's</option>
+                        @foreach (var c in ViewBag.Categories)
+                        {
+                            <option id="@c.CategoryID">@c.CategoryTitle</option>
+                        }
                     </select>
                 </div>
             </div>

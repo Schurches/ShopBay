@@ -31,13 +31,14 @@
     </div>
 
     <!--el footer-->
-    <footer class="bg-light pt-5 pb-2 mt-4 w-100" style="position:absolute;bottom:auto;left:0px">
+    <footer class="bg-dark pt-5 pb-2 mt-4 w-100 text-light" style="position:absolute;bottom:auto;left:0px">
         <div class="container">
-            <div class="row">
+            <div class="row col-12">
                 <div class="col-lg-4 col-md-6">
                     <!--Información de contacto-->
-                    <section class="widget widget-light-skin">
-                        <h3 class="widget-title">Get In Touch With Us</h3>
+                    <section>
+                        <h3 class="widget-title text-uppercase">Get In Touch With Us</h3>
+                        <hr/>
                         <p class="">Phone: 00 000 000 000</p>
                         <p>
                             <a class="navi-link-light" href="#">support@ShopBay.com</a>
@@ -46,19 +47,34 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <!--AboutUs-->
-                    <section class="widget widget-links widget-light-skin">
-                        <h3 class="widget-title">About Us</h3>
-                        <ul>
-                            <li><a href="#">Careers</a></li>
-                            <li><a href="#">About ShopBay</a></li>
-                            <li><a href="#">Our Story</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Our Blog</a></li>
-                        </ul>
+                    <section>
+                        <h3 class="widget-title text-uppercase">About Us</h3>
+                        <hr />
+                        <div class="row">
+                            <a href="#" class="nav-item col-12 py-1">Careers</a>
+                            <a href="#" class="nav-item col-12 py-1">About ShopBay</a>
+                            <a href="#" class="nav-item col-12 py-1">Our Story</a>
+                            <a href="#" class="nav-item col-12 py-1">Services</a>
+                        </div>
                     </section>
                 </div>
             </div>
-            <hr class="hr-light mt-2 margin-bottom-2x">
+            <hr/>
+            <div class="row">
+                <div class="col-7 pb-1">
+                    <!-- Payment Methods-->
+                    <img src="~/Content/payment_methods.png" alt="Payment Methods" class="img-fluid py-4">
+                </div>
+                <div class="col-5 pb-1">
+                    <!--Subscription-->
+                    <div class="row">
+                        <input class="col-7 bg-dark text-light my-4 py-3" type="email" placeholder="Your e-mail" style="border-radius:20px">
+                        <button class="btn btn-primary col-4 my-4 py-3 ml-1" type="submit" style="border-radius:20px">Subscibe</button>
+                    </div>
+                    <span class="text-light">Subscribe to our Newsletter to receive early discount offers, latest news, sales and promo information.</span>
+                </div>
+            </div>
+            <hr/>
 
 
             <!-- Copyright-->
