@@ -87,7 +87,7 @@
             <div class="row my-0">
                 <!--Estado del producto-->
                 <div class="form-group col-sm-4">
-                    <span class="text-muted">State:</span><span class="px-2">@Model.ProductCommentary</span>
+                    <span class="text-muted">State:</span><span class="px-2">Se necesita agregar a BD</span>
                 </div>
             </div>
 
@@ -107,9 +107,12 @@
 
             <div class="row mt-0">
                 <!--Cmapo para ofrecer precio de comprar, aparece si está subastado, se quit si el producto solo está a la venta-->
-                <div class="form-group col-md-3">
-                    <input type="text" class="form-control my-2" id="auction" maxlength="12" />
-                </div>
+                @if (!ViewBag.Onsale)
+                {
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control my-2" id="auction" maxlength="12" />
+                    </div>
+                }
 
                 <!--Boton de comprar o o ofrecer se cambia De Buy Now a Offer si está en modo subasta-->
                 <div class="col-md-3">

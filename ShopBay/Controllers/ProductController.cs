@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ShopBay.Models;
-namespace Intento.Controllers
+
+namespace ShopBay.Controllers
+
 {
     public class ProductController : Controller
     {
@@ -14,6 +16,11 @@ namespace Intento.Controllers
         {
             var product = db.Products.Find(id);
             ViewBag.Seller = db.Users.Find(product.UserID);
+            ViewBag.Onsale=true;
+            if (false)
+            {
+                ViewBag.Onsale = false;
+            }
             //ViewBag.Category = product.
             return View(product);
         }

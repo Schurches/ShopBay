@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Intento.Controllers
+namespace ShopBay.Controllers
 {
     public class SignInController : Controller
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ShopBay.Models;
-namespace Intento.Controllers
+namespace ShopBay.Controllers
 {
     public class ProductsController : Controller
     {
