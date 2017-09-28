@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Store</title>
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+        <div class="container" >
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarUltra" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-header" >
+                <a class="navbar-brand lead" href="@Url.Action("Index","Home")">ShopBay</a>
+            </div>
+            <div class="navbar-collapse collapse w-100" id="navbarUltra">
+                <form action="\Products\Products" method="post" class="form-inline my-1 my-lg-1 col justify-content-md-center">
+                    <input class="form-control mr-sm-2 w-50" type="text" placeholder="Search" aria-label="Search" id="bus" name="keyWords" />
+                    <button class="btn btn-outline-primary my-1 my-sm-0" type="submit" id="but">Search</button>
+                </form>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content marginTopContent">
+        @RenderBody()
+
+    </div>
+
+    <!--el footer-->
+    <footer class="bg-light pt-5 pb-2 mt-4 w-100" style="position:absolute;bottom:auto;left:0px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <!--Información de contacto-->
+                    <section class="widget widget-light-skin">
+                        <h3 class="widget-title">Get In Touch With Us</h3>
+                        <p class="">Phone: 00 000 000 000</p>
+                        <p>
+                            <a class="navi-link-light" href="#">support@ShopBay.com</a>
+                        </p>
+                    </section>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <!--AboutUs-->
+                    <section class="widget widget-links widget-light-skin">
+                        <h3 class="widget-title">About Us</h3>
+                        <ul>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">About ShopBay</a></li>
+                            <li><a href="#">Our Story</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Our Blog</a></li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+            <hr class="hr-light mt-2 margin-bottom-2x">
+
+
+            <!-- Copyright-->
+            <p class="footer-copyright">© All rights reserved.</p>
+        </div>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

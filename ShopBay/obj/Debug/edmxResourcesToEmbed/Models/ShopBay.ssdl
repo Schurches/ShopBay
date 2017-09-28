@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopBayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Auction">
+    <Key>
+      <PropertyRef Name="AuctionID" />
+    </Key>
+    <Property Name="AuctionID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="CurrentBid" Type="int" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ShopBay.dbo.BidList' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="BidList">
+    <Key>
+      <PropertyRef Name="AuctionID" />
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="AuctionID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Bid" Type="int" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="CategoryTitle" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+    <Property Name="CategoryImage" Type="image" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ShopBay.dbo.ImageCatalog' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ImageCatalog">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="ProductImage" Type="image" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ShopBay.dbo.Movements' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Movements">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Ammount" Type="int" />
+  </EntityType>
+  <EntityType Name="OnSaleProducts">
+    <Key>
+      <PropertyRef Name="SaleID" />
+    </Key>
+    <Property Name="SaleID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ProductCategory">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCommentary' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ProductCommentary">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="Rate" Type="float" />
+    <Property Name="Comment" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Price" Type="int" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="ShippingID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+    <Property Name="Existencies" Type="int" />
+    <Property Name="Rate" Type="float" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductsSold' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ProductsSold">
+    <Key>
+      <PropertyRef Name="BuyerID" />
+      <PropertyRef Name="SellerID" />
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="ShippingID" />
+    </Key>
+    <Property Name="BuyerID" Type="int" Nullable="false" />
+    <Property Name="SellerID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="BuyDate" Type="date" />
+    <Property Name="Price" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="ShippingID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ShopBay.dbo.ProfileCommentary' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ProfileCommentary">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="RatedUserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="RatedUserID" Type="int" Nullable="false" />
+    <Property Name="Rate" Type="float" />
+    <Property Name="Commentary" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="ShippingOptions">
+    <Key>
+      <PropertyRef Name="ShippingID" />
+    </Key>
+    <Property Name="ShippingID" Type="int" Nullable="false" />
+    <Property Name="ArrivalTime" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+    <Property Name="ShippingTitle" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Information" Type="varchar" MaxLength="50" />
+    <Property Name="Telephone" Type="varchar" MaxLength="50" />
+    <Property Name="Mail" Type="varchar" MaxLength="50" />
+    <Property Name="Rate" Type="float" />
+    <Property Name="AccMoney" Type="int" />
+    <Property Name="Image" Type="image" />
+  </EntityType>
+  <Association Name="FK_Auction_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="Auction" Type="Self.Auction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Auction">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BidList_Auction">
+    <End Role="Auction" Type="Self.Auction" Multiplicity="1" />
+    <End Role="BidList" Type="Self.BidList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Auction">
+        <PropertyRef Name="AuctionID" />
+      </Principal>
+      <Dependent Role="BidList">
+        <PropertyRef Name="AuctionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BidList_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="BidList" Type="Self.BidList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="BidList">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ImageCatalog_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ImageCatalog" Type="Self.ImageCatalog" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ImageCatalog">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movements_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Movements" Type="Self.Movements" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Movements">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OnSaleProducts_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="OnSaleProducts" Type="Self.OnSaleProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="OnSaleProducts">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductCategory_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="ProductCategory">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductCategory_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductCategory">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductCommentary_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ProductCommentary" Type="Self.ProductCommentary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductCommentary">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductCommentary_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ProductCommentary" Type="Self.ProductCommentary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ProductCommentary">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_ShippingOptions">
+    <End Role="ShippingOptions" Type="Self.ShippingOptions" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShippingOptions">
+        <PropertyRef Name="ShippingID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="ShippingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductsSold_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ProductsSold" Type="Self.ProductsSold" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductsSold">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductsSold_ShippingOptions">
+    <End Role="ShippingOptions" Type="Self.ShippingOptions" Multiplicity="1" />
+    <End Role="ProductsSold" Type="Self.ProductsSold" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShippingOptions">
+        <PropertyRef Name="ShippingID" />
+      </Principal>
+      <Dependent Role="ProductsSold">
+        <PropertyRef Name="ShippingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductsSold_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ProductsSold" Type="Self.ProductsSold" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ProductsSold">
+        <PropertyRef Name="BuyerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductsSold_Users1">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ProductsSold" Type="Self.ProductsSold" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ProductsSold">
+        <PropertyRef Name="SellerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileCommentary_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ProfileCommentary" Type="Self.ProfileCommentary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ProfileCommentary">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileCommentary_Users1">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ProfileCommentary" Type="Self.ProfileCommentary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ProfileCommentary">
+        <PropertyRef Name="RatedUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ShopBayModelStoreContainer">
+    <EntitySet Name="Auction" EntityType="Self.Auction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OnSaleProducts" EntityType="Self.OnSaleProducts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShippingOptions" EntityType="Self.ShippingOptions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BidList" EntityType="Self.BidList" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BidList].[AuctionID] AS [AuctionID], 
+    [BidList].[UserID] AS [UserID], 
+    [BidList].[Bid] AS [Bid]
+    FROM [dbo].[BidList] AS [BidList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ImageCatalog" EntityType="Self.ImageCatalog" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ImageCatalog].[ProductID] AS [ProductID], 
+    [ImageCatalog].[ProductImage] AS [ProductImage]
+    FROM [dbo].[ImageCatalog] AS [ImageCatalog]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Movements" EntityType="Self.Movements" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Movements].[UserID] AS [UserID], 
+    [Movements].[Type] AS [Type], 
+    [Movements].[Ammount] AS [Ammount]
+    FROM [dbo].[Movements] AS [Movements]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProductCategory].[CategoryID] AS [CategoryID], 
+    [ProductCategory].[ProductID] AS [ProductID]
+    FROM [dbo].[ProductCategory] AS [ProductCategory]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProductCommentary" EntityType="Self.ProductCommentary" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProductCommentary].[UserID] AS [UserID], 
+    [ProductCommentary].[ProductID] AS [ProductID], 
+    [ProductCommentary].[Rate] AS [Rate], 
+    [ProductCommentary].[Comment] AS [Comment]
+    FROM [dbo].[ProductCommentary] AS [ProductCommentary]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProductsSold" EntityType="Self.ProductsSold" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProductsSold].[BuyerID] AS [BuyerID], 
+    [ProductsSold].[SellerID] AS [SellerID], 
+    [ProductsSold].[ProductID] AS [ProductID], 
+    [ProductsSold].[BuyDate] AS [BuyDate], 
+    [ProductsSold].[Price] AS [Price], 
+    [ProductsSold].[Quantity] AS [Quantity], 
+    [ProductsSold].[ShippingID] AS [ShippingID]
+    FROM [dbo].[ProductsSold] AS [ProductsSold]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProfileCommentary" EntityType="Self.ProfileCommentary" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProfileCommentary].[UserID] AS [UserID], 
+    [ProfileCommentary].[RatedUserID] AS [RatedUserID], 
+    [ProfileCommentary].[Rate] AS [Rate], 
+    [ProfileCommentary].[Commentary] AS [Commentary]
+    FROM [dbo].[ProfileCommentary] AS [ProfileCommentary]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Auction_Products" Association="Self.FK_Auction_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Auction" EntitySet="Auction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BidList_Auction" Association="Self.FK_BidList_Auction">
+      <End Role="Auction" EntitySet="Auction" />
+      <End Role="BidList" EntitySet="BidList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BidList_Users" Association="Self.FK_BidList_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="BidList" EntitySet="BidList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ImageCatalog_Products" Association="Self.FK_ImageCatalog_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ImageCatalog" EntitySet="ImageCatalog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movements_Users" Association="Self.FK_Movements_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Movements" EntitySet="Movements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OnSaleProducts_Products" Association="Self.FK_OnSaleProducts_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="OnSaleProducts" EntitySet="OnSaleProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductCategory_Category" Association="Self.FK_ProductCategory_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="ProductCategory" EntitySet="ProductCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductCategory_Products" Association="Self.FK_ProductCategory_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductCategory" EntitySet="ProductCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductCommentary_Products" Association="Self.FK_ProductCommentary_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductCommentary" EntitySet="ProductCommentary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductCommentary_Users" Association="Self.FK_ProductCommentary_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ProductCommentary" EntitySet="ProductCommentary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_ShippingOptions" Association="Self.FK_Products_ShippingOptions">
+      <End Role="ShippingOptions" EntitySet="ShippingOptions" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Users" Association="Self.FK_Products_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductsSold_Products" Association="Self.FK_ProductsSold_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductsSold" EntitySet="ProductsSold" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductsSold_ShippingOptions" Association="Self.FK_ProductsSold_ShippingOptions">
+      <End Role="ShippingOptions" EntitySet="ShippingOptions" />
+      <End Role="ProductsSold" EntitySet="ProductsSold" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductsSold_Users" Association="Self.FK_ProductsSold_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ProductsSold" EntitySet="ProductsSold" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductsSold_Users1" Association="Self.FK_ProductsSold_Users1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ProductsSold" EntitySet="ProductsSold" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileCommentary_Users" Association="Self.FK_ProfileCommentary_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ProfileCommentary" EntitySet="ProfileCommentary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileCommentary_Users1" Association="Self.FK_ProfileCommentary_Users1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ProfileCommentary" EntitySet="ProfileCommentary" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

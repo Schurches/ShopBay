@@ -1,0 +1,58 @@
+﻿@model ShopBay.Models.Users
+@{
+    ViewBag.Title = "Profile";
+}
+
+
+<div class="container marginTopContent pt-5">
+    <!--Perfil de usuario desde la perspectiva de otro usuario-->
+    <div class="row">
+        <div class="col-md-3">
+            <!--Menú del perfil de usuario-->
+            <div class="row text-center menuBar">
+                <a href="@Url.Action( "ProfileU" , "ProfileU" , new { id=Model.UserID})" class="nav-item col-12 bg-light py-2">Profile</a>
+                <a href="@Url.Action( "History" , "ProfileU")" class="nav-item col-12 bg-light py-2">Sales History</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            @Html.Partial("History");
+            <div class="row">
+                <!--foto del perfil-->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-top" src="https://cdn0.vox-cdn.com/uploads/chorus_asset/file/8667595/xboxonex.jpg" alt="ProfileImage" />
+                        <div class="card-header text-center lead">
+                            <span>@Model.Username</span>
+                        </div>
+                    </div>
+
+                </div>
+                <!--Información basica del usuario-->
+                <div class="col-md-8">
+                    <form class="row">
+                        <div class="col-md-6 py-2">
+                            <label class="text-muted">Name</label>
+                            <span class="d-block" id="userName">@Model.Name</span>
+                        </div>
+                        <div class="col-md-6 py-2">
+                            <label class="text-muted">Last Name</label>
+                            <span class="d-block" id="lastName">@Model.Information</span>
+                        </div>
+                        <div class="col-md-6 py-2">
+                            <label class="text-muted">Telephone</label>
+                            <span class="d-block" id="userPhone">@Model.Telephone</span>
+                        </div>
+                        <div class="col-md-6 py-2">
+                            <label class="text-muted">Mail</label>
+                            <span class="d-block" id="userEmail">@Model.Mail</span>
+                        </div>
+                        <div class="col-12 pt-1">
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

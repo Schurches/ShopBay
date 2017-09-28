@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ShopBay.Models.Products>
+@{
+    ViewBag.Title = "Products";
+}
+
+<div class="container marginTopContent pt-5">
+    <div class="row">
+        <div class="col-sm-12 col-md-3 col-lg-3">
+            <div class="row text-center menuBar bg-light">
+                @foreach (var c in ViewBag.categories)
+                {
+                    <a href="@Url.Action("Products","Products",new { id = c.CategoryID })" class="nav-item col-12 bg-light py-2">@c.CategoryTitle</a>
+                }
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-9 col-lg-9 justify-content-center">
+            <div class="col-12">
+                <span class="display-4" runat="server">@ViewBag.categoryTitle</span>
+            </div>
+            <div class="col-12">
+                <hr />
+            </div>
+            <div class="card-deck" runat="server">
+              
+                <!--Plantilla producto-->
+                
+                 @foreach (var p in Model)
+                 {
+                    <div class="col-xm-12 col-sm-6 col-md-6 col-lg-4 product-item mb-4">
+                        <div class="card productCard shadowCard productCardHover">
+                            <a href="@Url.Action( "Product" , "Product" , new { id = p.ProductID })">
+                                <img class="card-img-top" src="https://cdn0.vox-cdn.com/uploads/chorus_asset/file/8667595/xboxonex.jpg" alt=""/>
+                                <h6 class="card-title text-center lead pt-3 pb-2 mb-0 titleProduct">@p.Name</h6>
+                            </a>
+                            <div class="card-body text-center lead py-0">
+                                <span class="small lead">$</span><span class="small lead">@p.Price</span>
+                            </div>
+                        </div>
+                   </div>
+                 }
+
+            </div>
+        </div>
+    </div>
+</div>

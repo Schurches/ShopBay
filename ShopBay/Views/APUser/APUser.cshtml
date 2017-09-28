@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "APUser";
+}
+
+<div class="container marginTopContent pt-4">
+    <div class="row">
+        <div class="col-sm-12 col-md-5">
+
+        </div>
+        <div class="col-sm-12 col-md-7">
+
+            <div class="row mt-1">
+                <div class="form-group col-sm-4">
+                    <label for="nombreProducto">Product Name</label>
+                    <input type="text" class="form-control" id="nombreProducto" maxlength="60" />
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="priceProduct">Price</label>
+                    $<input type="text" class="form-control" id="priceProduct" maxlength="12">
+                </div>
+            </div>
+
+            <div class="row mt-1">
+                <div class="form-group col-sm-8">
+                    <label for="descProduct">Description</label>
+                    <textarea maxlength="123" id="descProduct" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="row mt-1">
+                <div class="form-group col-sm-4">
+                    <label for="quantity">Quantity</label>
+                    <input type="text" class="form-control" id="quantity" maxlength="3">
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="sProduct">Buy or Auction</label>
+                    <select class="form-control" id="sProduct">
+                        <option>Buy Now</option>
+                        <option>Acution</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row my-0 justify-content-between">
+                <div class="form-group col-sm-4">
+                    <label for="categoryProduct">Category</label>
+                    <select class="form-control" id="categoryProduct">
+                        <option>Computers</option>
+                        <option>Tv's</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-0">
+                <div class="col-md-3">
+                    <button class="btn btn-primary my-2" type="submit">Plublish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
