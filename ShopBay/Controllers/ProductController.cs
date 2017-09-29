@@ -16,7 +16,7 @@ namespace ShopBay.Controllers
         {
             var product = db.Products.Find(id);
             ViewBag.Seller = db.Users.Find(product.UserID);
-            ViewBag.isAuction = 0;
+            ViewBag.isAuction=product.isAuction;
             ViewBag.Category = product.Category.FirstOrDefault();
             return View(product);
         }
