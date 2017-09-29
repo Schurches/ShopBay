@@ -17,40 +17,46 @@
             </div>
             <!--Información basica del usuario-->
             <div class="col-md-8">
-                <span class="h1 lead">Comentaries</span>
-                <hr />
-                <div class="row container mb-3">
-                    <!--Plantilla de comentario-->
-                    <div class="bg-dark row" style="border-radius:15px;min-width:400px">
-                        <div class="col-lg-2 col-md-3 col-sm-4 justify-content-center">
-                            <img src="http://bootdey.com/img/Content/user_1.jpg" class="rounded card-img float-left" alt="user profile image" style="max-height:100px;max-width:117px;min-height:90px;min-width:90px">
+                <div class="container">
+
+                    <span class="h1 lead">Comentaries</span>
+                    <hr />
+                    <!--Contenedor comentarios-->
+                    <div class="row">
+
+                        <!--Plantilla de comentario-->
+                        <div class=" col-12  bg-dark my-2" style="border-radius:15px">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-3 col-sm-4">
+                                    <img src="http://bootdey.com/img/Content/user_1.jpg" class="rounded card-img float-left" alt="user profile image" style="max-height:100px;max-width:117px;min-height:90px;min-width:90px">
+                                </div>
+                                <div class="col-lg-10 col-md-9 col-sm-8">
+                                    <a href="#"><b>Jon Dou</b></a>
+                                    <p class="text-light pt-1 mb-0">Está muy elegante este producto simplemente el mejor muy elegante este producto simplemente el mejor</p>
+                                    <span class="text-muted py-0 my-0">4.5</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-lg-10 col-md-9 col-sm-8">
-                            <a href="#"><b>Jon Dou</b></a>
-                            <p class="text-light pt-1 mb-0">Está muy elegante este producto simplemente el mejor muy elegante este producto simplemente el mejor</p>
-                            <span class="text-muted py-0 my-0">4.5</span>
-                        </div>
+
                     </div>
-
+                    <hr />
+                    <!--Formulario de feedback-->
+                    <form class="row">
+                        <span class="h1 lead">Feedback</span>
+                        <textarea maxlength="123" id="coment" class="form-control col-12 bg-dark text-light" style="resize:none;border-radius:15px" placeholder="Your comment here!"></textarea>
+                        <!--calificación por feedback-->
+                        <select class="form-control my-2 ml-2 col-sm-3 col-md-2" style="border-radius:15px">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                        <button class="form-control btn btn-primary my-2 ml-2 col-sm-3 col-md-2" type="submit" style="border-radius:15px">
+                            Send
+                        </button>
+                    </form>
                 </div>
-                <hr />
-                <form class="row container">
-                    <span class="lead h2">Feedback</span>
-                    <textarea maxlength="123" id="coment" class="form-control col-12 bg-dark text-light" style="resize:none;border-radius:15px" placeholder="Your comment here!"></textarea>
-                    <!--calificación por feedback-->
-                    <span class="my-2 mr-2">Rate</span>
-                    <select class="form-control my-2 col-sm-4 col-md-3 col-lg-2" style="border-radius:15px">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-                    <button class="btn btn-primary my-2 ml-2 col-sm-4 col-md-3 col-lg-2 form-control" type="submit" style="border-radius:15px">
-                        Send
-                    </button>
-                </form>
-
             </div>
      </div>
 </div>
