@@ -47,6 +47,7 @@ namespace ShopBay.Controllers
             }
             else
             {
+                ViewBag.categoryTitle = "Result of all";
                 var Query = from product in db.Products select product;
                 return View(Query);
             }

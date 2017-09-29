@@ -8,6 +8,7 @@
         <!--aquí carusel de las imagenes del producto-->
         <div class="col-sm-12 col-md-5 py-3">
             <div class="row">
+
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active py-2">
@@ -46,7 +47,7 @@
         <!--contenedor información del producto-->
         <div class="col-sm-12 col-md-7">
 
-            <!--Nombre dle vendedor-->
+            <!--Nombre del vendedor-->
             <div class="py-2">
                 <span class="text-muted">
                     Seller:
@@ -59,12 +60,12 @@
             <h3 class="pt-1 text-normal">@Model.Name</h3>
 
             <!--Precio del producto-->
-            <span class="h3 d-block">
+            <span class="h3">
                 $<span class="">@Model.Price</span>
             </span>
 
             <!--Descripción del producto-->
-            <p class="pr-4">@Model.Description</p>
+            <p class="pr-4 my-2">@Model.Description</p>
 
             <div class="row mt-1">
 
@@ -84,14 +85,10 @@
                 </div>
             </div>
 
-            <div class="row my-0">
-                <!--Estado del producto-->
-                <div class="form-group col-sm-4">
-                    <span class="text-muted">State:</span><span class="px-2">Se necesita agregar a BD</span>
-                </div>
-            </div>
-
-            <div class="row my-0 justify-content-between">
+            <!--Estado del producto-->
+           <span class="text-muted px-0 my-2">State:</span><span class="px-2">Se necesita agregar a BD</span>
+            
+            <div class="row my-0 justify-content-between mt-3 mb-1">
                 <!--Categoria a la que pertenece-->
                 <div class="form-group col-sm-6">
                     <span class="text-muted">Categories:</span>
@@ -103,9 +100,7 @@
                 </div>
             </div>
 
-            <hr class="my-0">
-
-            <div class="row mt-0">
+            <div class="row my-0 py-0">
                 <!--Cmapo para ofrecer precio de comprar, aparece si está subastado, se quit si el producto solo está a la venta-->
                 @if (!ViewBag.Onsale)
                 {
@@ -120,23 +115,8 @@
                         Buy Now
                     </button>
                 </div>
-                <div class="form-group col-md-3">
-                    <!--calificación por feedback-->
-                    <select class="form-control my-2" id="fb">
-                        <option class="text-muted">Feedback</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-primary my-2" type="submit">
-                        Send
-                    </button>
-                </div>
             </div>
+            
         </div>
     </div>
 </div>

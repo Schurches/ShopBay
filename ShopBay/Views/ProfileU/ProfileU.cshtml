@@ -7,51 +7,78 @@
 <div class="container marginTopContent pt-5">
     <!--Perfil de usuario desde la perspectiva de otro usuario-->
     <div class="row">
-        <div class="col-md-3">
-            <!--Menú del perfil de usuario-->
-            <div class="row text-center menuBar">
-                <a href="@Url.Action( "ProfileU" , "ProfileU" , new { id=Model.UserID})" class="nav-item col-12 bg-light py-2">Profile</a>
-                <a href="@Url.Action( "History" , "ProfileU")" class="nav-item col-12 bg-light py-2">Sales History</a>
+            <!--foto del perfil-->
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="https://cdn0.vox-cdn.com/uploads/chorus_asset/file/8667595/xboxonex.jpg" alt="ProfileImage" />
+                    <span class="card-title text-center lead">@Model.Username</span>
+                    <span class="card-title text-center lead">@Model.Rate</span>
+                </div>
             </div>
-        </div>
-        <div class="col-md-9">
-            <div class="row">
-                <!--foto del perfil-->
-                <div class="col-md-4">
-                    <div class="card">
-                        <img class="card-img-top" src="https://cdn0.vox-cdn.com/uploads/chorus_asset/file/8667595/xboxonex.jpg" alt="ProfileImage" />
-                        <div class="card-header text-center lead">
-                            <span>@Model.Username</span>
+            <!--Información basica del usuario-->
+            <div class="col-md-8">
+                <span class="h1 lead">Comentaries</span>
+                <hr />
+                <div class="row container mb-3">
+                    <!--Plantilla de comentario-->
+                    <div class="bg-dark row" style="border-radius:15px;min-width:400px">
+                        <div class="col-lg-2 col-md-3 col-sm-4 justify-content-center">
+                            <img src="http://bootdey.com/img/Content/user_1.jpg" class="rounded card-img float-left" alt="user profile image" style="max-height:100px;max-width:117px;min-height:90px;min-width:90px">
+                        </div>
+                        <div class="col-lg-10 col-md-9 col-sm-8">
+                            <a href="#"><b>Jon Dou</b></a>
+                            <p class="text-light pt-1 mb-0">Está muy elegante este producto simplemente el mejor muy elegante este producto simplemente el mejor</p>
+                            <span class="text-muted py-0 my-0">4.5</span>
                         </div>
                     </div>
 
                 </div>
-                <!--Información basica del usuario-->
-                <div class="col-md-8">
-                    <form class="row">
-                        <div class="col-md-6 py-2">
-                            <label class="text-muted">Name</label>
-                            <span class="d-block" id="userName">@Model.Name</span>
-                        </div>
-                        <div class="col-md-6 py-2">
-                            <label class="text-muted">Last Name</label>
-                            <span class="d-block" id="lastName">@Model.Information</span>
-                        </div>
-                        <div class="col-md-6 py-2">
-                            <label class="text-muted">Telephone</label>
-                            <span class="d-block" id="userPhone">@Model.Telephone</span>
-                        </div>
-                        <div class="col-md-6 py-2">
-                            <label class="text-muted">Mail</label>
-                            <span class="d-block" id="userEmail">@Model.Mail</span>
-                        </div>
-                        <div class="col-12 pt-1">
-
-                        </div>
-                    </form>
+                <hr />
+                <div class="row container">
+                    <span class="lead h2">Feedback</span>
+                    <textarea maxlength="123" id="coment" class="form-control col-12 bg-dark text-light" style="resize:none;border-radius:15px" placeholder="Your comment here!"></textarea>
+                    <!--calificación por feedback-->
+                    <span class="my-2 mr-2">Rate</span>
+                    <select class="form-control my-2 col-sm-4 col-md-3 col-lg-2" style="border-radius:15px">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                    <button class="btn btn-primary my-2 ml-2 col-sm-4 col-md-3 col-lg-2 form-control" type="submit" style="border-radius:15px">
+                        Send
+                    </button>
                 </div>
-            </div>
-        </div>
-    </div>
 
+            </div>
+     </div>
 </div>
+        <div class="col-12 mt-4">
+
+                <!--<h2 class="lead">Products record</h2>
+                <table class="table">
+                    <thead class="thead-default">
+                        <tr>
+                            <th>#</th>
+                            <th>Product</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Rate</th>
+                            <th>State</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <th>Samsung</th>
+                            <th>Celular</th>
+                            <th>2.000.000</th>
+                            <th>12/th>
+                            <th>4.3</th>
+                            <th>Onsale</th>
+                        </tr>
+                    </tbody>
+                </table>-->
+            </div>

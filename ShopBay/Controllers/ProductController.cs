@@ -17,10 +17,7 @@ namespace ShopBay.Controllers
             var product = db.Products.Find(id);
             ViewBag.Seller = db.Users.Find(product.UserID);
             ViewBag.Onsale=true;
-            if (false)
-            {
-                ViewBag.Onsale = false;
-            }
+            
             //ViewBag.Category = product.
             return View(product);
         }
