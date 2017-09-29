@@ -84,15 +84,16 @@
                     </select>
                 </div>
             </div>
-
-            <!--Estado del producto-->
-           <span class="text-muted px-0 my-2">State:</span><span class="px-2">Se necesita agregar a BD</span>
-            
+            @if (ViewBag.isAuction == 1)
+            {
+               <!--Estado del producto-->
+               <time class="text-muted px-0 my-2">Auction time:</time><time class="px-2">0000-00-00T00:00</time>
+            }
             <div class="row my-0 justify-content-between mt-3 mb-1">
                 <!--Categoria a la que pertenece-->
                 <div class="form-group col-sm-6">
                     <span class="text-muted">Categories:</span>
-                    <a class="navi-link" href="#">@ViewBag.Category</a>
+                    <a class="navi-link" href="@Url.Action( "Products", "Products" , new { id=ViewBag.Category.CategoryID})">@ViewBag.Category.CategoryTitle</a>
                 </div>
                 <!--Identificador del producto-->
                 <div class="form-group col-sm-6">
@@ -102,7 +103,7 @@
 
             <div class="row my-0 py-0">
                 <!--Cmapo para ofrecer precio de comprar, aparece si está subastado, se quit si el producto solo está a la venta-->
-                @if (!ViewBag.Onsale)
+                @if (ViewBag.isAuction== 1)
                 {
                     <div class="form-group col-md-3">
                         <input type="text" class="form-control my-2" id="auction" maxlength="12" />
