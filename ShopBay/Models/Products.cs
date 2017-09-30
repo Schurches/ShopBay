@@ -33,7 +33,7 @@ namespace ShopBay.Models
         public Nullable<int> Existencies { get; set; }
         public Nullable<double> Rate { get; set; }
         public int isAuction { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Auction> Auction { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
