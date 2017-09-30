@@ -14,6 +14,7 @@ namespace ShopBay.Models
     
     public partial class ProductCommentary
     {
+        public int ProductCommentaryID { get; set; }
         public int UserID { get; set; }
         public int ProductID { get; set; }
         public Nullable<double> Rate { get; set; }

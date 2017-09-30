@@ -1,6 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ShopBayModelStoreContainer" CdmEntityContainer="ShopBayEntities">
+    <EntitySetMapping Name="AdminUsers">
+      <EntityTypeMapping TypeName="ShopBayModel.AdminUsers">
+        <MappingFragment StoreEntitySet="AdminUsers">
+          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Auction">
       <EntityTypeMapping TypeName="ShopBayModel.Auction">
         <MappingFragment StoreEntitySet="Auction">
@@ -21,6 +30,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Movements">
+      <EntityTypeMapping TypeName="ShopBayModel.Movements">
+        <MappingFragment StoreEntitySet="Movements">
+          <ScalarProperty Name="MovementsID" ColumnName="MovementsID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Ammount" ColumnName="Ammount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="OnSaleProducts">
       <EntityTypeMapping TypeName="ShopBayModel.OnSaleProducts">
         <MappingFragment StoreEntitySet="OnSaleProducts">
@@ -29,10 +48,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProductCommentary">
+      <EntityTypeMapping TypeName="ShopBayModel.ProductCommentary">
+        <MappingFragment StoreEntitySet="ProductCommentary">
+          <ScalarProperty Name="ProductCommentaryID" ColumnName="ProductCommentaryID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="ShopBayModel.Products">
         <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="isAuction" ColumnName="isAution" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Price" ColumnName="Price" />
@@ -41,6 +70,32 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Existencies" ColumnName="Existencies" />
           <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="isAuction" ColumnName="isAuction" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductsSold">
+      <EntityTypeMapping TypeName="ShopBayModel.ProductsSold">
+        <MappingFragment StoreEntitySet="ProductsSold">
+          <ScalarProperty Name="SalesID" ColumnName="SalesID" />
+          <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
+          <ScalarProperty Name="SellerID" ColumnName="SellerID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="BuyDate" ColumnName="BuyDate" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="ShippingID" ColumnName="ShippingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfileCommentary">
+      <EntityTypeMapping TypeName="ShopBayModel.ProfileCommentary">
+        <MappingFragment StoreEntitySet="ProfileCommentary">
+          <ScalarProperty Name="ProfileCommentaryID" ColumnName="ProfileCommentaryID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="RatedUserID" ColumnName="RatedUserID" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Commentary" ColumnName="Commentary" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -88,48 +143,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Movements">
-      <EntityTypeMapping TypeName="ShopBayModel.Movements">
-        <MappingFragment StoreEntitySet="Movements">
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="Ammount" ColumnName="Ammount" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ProductCommentary">
-      <EntityTypeMapping TypeName="ShopBayModel.ProductCommentary">
-        <MappingFragment StoreEntitySet="ProductCommentary">
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ProductsSold">
-      <EntityTypeMapping TypeName="ShopBayModel.ProductsSold">
-        <MappingFragment StoreEntitySet="ProductsSold">
-          <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
-          <ScalarProperty Name="SellerID" ColumnName="SellerID" />
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-          <ScalarProperty Name="BuyDate" ColumnName="BuyDate" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="ShippingID" ColumnName="ShippingID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ProfileCommentary">
-      <EntityTypeMapping TypeName="ShopBayModel.ProfileCommentary">
-        <MappingFragment StoreEntitySet="ProfileCommentary">
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="RatedUserID" ColumnName="RatedUserID" />
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
-          <ScalarProperty Name="Commentary" ColumnName="Commentary" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <AssociationSetMapping Name="ProductCategory" TypeName="ShopBayModel.ProductCategory" StoreEntitySet="ProductCategory">
       <EndProperty Name="Category">
         <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
@@ -138,14 +151,5 @@
         <ScalarProperty Name="ProductID" ColumnName="ProductID" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="AdminUsers">
-      <EntityTypeMapping TypeName="ShopBayModel.AdminUsers">
-        <MappingFragment StoreEntitySet="AdminUsers">
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

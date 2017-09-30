@@ -14,6 +14,7 @@ namespace ShopBay.Models
     
     public partial class Movements
     {
+        public int MovementsID { get; set; }
         public int UserID { get; set; }
         public string Type { get; set; }
         public Nullable<int> Ammount { get; set; }

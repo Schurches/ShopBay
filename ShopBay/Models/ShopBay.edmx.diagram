@@ -4,37 +4,37 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="00775fd72b6a437898b9aff5de1fb903" Name="Diagram1">
-        <EntityTypeShape EntityType="ShopBayModel.Auction" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBayModel.Category" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBayModel.OnSaleProducts" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBayModel.Products" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBayModel.ShippingOptions" Width="1.5" PointX="0.75" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBayModel.Users" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBayModel.BidList" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBayModel.ImageCatalog" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBayModel.Movements" Width="1.5" PointX="3" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBayModel.ProductCommentary" Width="1.5" PointX="8.25" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBayModel.ProductsSold" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBayModel.ProfileCommentary" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
+      <Diagram DiagramId="7d1ce27cda414b33b19f95aec221d706" Name="Diagram1">
+        <EntityTypeShape EntityType="ShopBayModel.AdminUsers" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBayModel.Auction" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBayModel.Category" Width="1.5" PointX="3.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBayModel.Movements" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBayModel.OnSaleProducts" Width="1.5" PointX="8.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBayModel.ProductCommentary" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBayModel.Products" Width="1.5" PointX="6" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBayModel.ProductsSold" Width="1.5" PointX="11.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBayModel.ProfileCommentary" Width="1.5" PointX="3" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBayModel.ShippingOptions" Width="1.5" PointX="3.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBayModel.Users" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBayModel.BidList" Width="1.5" PointX="10.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBayModel.ImageCatalog" Width="1.5" PointX="8.25" PointY="17.625" IsExpanded="true" />
         <AssociationConnector Association="ShopBayModel.FK_Auction_Products" ManuallyRouted="false" />
         <AssociationConnector Association="ShopBayModel.FK_BidList_Auction" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopBayModel.FK_Movements_Users" ManuallyRouted="false" />
         <AssociationConnector Association="ShopBayModel.FK_OnSaleProducts_Products" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopBayModel.FK_ImageCatalog_Products" ManuallyRouted="false" />
         <AssociationConnector Association="ShopBayModel.FK_ProductCommentary_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopBayModel.FK_ProductCommentary_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopBayModel.FK_ImageCatalog_Products" ManuallyRouted="false" />
         <AssociationConnector Association="ShopBayModel.FK_Products_ShippingOptions" ManuallyRouted="false" />
         <AssociationConnector Association="ShopBayModel.FK_Products_Users" ManuallyRouted="false" />
         <AssociationConnector Association="ShopBayModel.FK_ProductsSold_Products" ManuallyRouted="false" />
         <AssociationConnector Association="ShopBayModel.FK_ProductsSold_ShippingOptions" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopBayModel.FK_BidList_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopBayModel.FK_Movements_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopBayModel.FK_ProductCommentary_Users" ManuallyRouted="false" />
         <AssociationConnector Association="ShopBayModel.FK_ProductsSold_Users" ManuallyRouted="false" />
         <AssociationConnector Association="ShopBayModel.FK_ProductsSold_Users1" ManuallyRouted="false" />
         <AssociationConnector Association="ShopBayModel.FK_ProfileCommentary_Users" ManuallyRouted="false" />
         <AssociationConnector Association="ShopBayModel.FK_ProfileCommentary_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopBayModel.FK_BidList_Users" ManuallyRouted="false" />
         <AssociationConnector Association="ShopBayModel.ProductCategory" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ShopBayModel.AdminUsers" Width="1.5" PointX="3.125" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

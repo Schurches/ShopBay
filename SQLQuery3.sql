@@ -1,2 +1,0 @@
-﻿ALTER TABLE BidList
-ADD PRIMARY KEY (BidID)

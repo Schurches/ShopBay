@@ -270,7 +270,6 @@ C:\Users\andre\Documents\GitHub\ShopBay\ShopBay\bin\es\Microsoft.Owin.Security.F
 C:\Users\andre\Documents\GitHub\ShopBay\ShopBay\bin\es\Microsoft.Owin.Security.Google.resources.dll
 C:\Users\andre\Documents\GitHub\ShopBay\ShopBay\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Users\andre\Documents\GitHub\ShopBay\ShopBay\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Users\andre\Documents\GitHub\ShopBay\ShopBay\obj\Debug\ShopBay.csprojResolveAssemblyReference.cache
 C:\Users\andre\Documents\GitHub\ShopBay\ShopBay\obj\Debug\ShopBay.csproj.CoreCompileInputs.cache
 C:\Users\andre\Documents\GitHub\ShopBay\ShopBay\obj\Debug\ShopBay.dll
 C:\Users\andre\Documents\GitHub\ShopBay\ShopBay\obj\Debug\ShopBay.pdb

@@ -38,9 +38,9 @@ namespace ShopBay.Models
         public virtual ICollection<Auction> Auction { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OnSaleProducts> OnSaleProducts { get; set; }
-        public virtual ImageCatalog ImageCatalog { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductCommentary> ProductCommentary { get; set; }
+        public virtual ImageCatalog ImageCatalog { get; set; }
         public virtual ShippingOptions ShippingOptions { get; set; }
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

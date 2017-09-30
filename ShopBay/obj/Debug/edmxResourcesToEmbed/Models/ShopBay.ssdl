@@ -46,12 +46,11 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ImageCatalog' no tiene definida 
     <Property Name="ProductID" Type="int" Nullable="false" />
     <Property Name="ProductImage" Type="image" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ShopBay.dbo.Movements' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="Movements">
     <Key>
-      <PropertyRef Name="UserID" />
+      <PropertyRef Name="MovementsID" />
     </Key>
+    <Property Name="MovementsID" Type="int" Nullable="false" />
     <Property Name="UserID" Type="int" Nullable="false" />
     <Property Name="Type" Type="varchar" MaxLength="50" />
     <Property Name="Ammount" Type="int" />
@@ -67,19 +66,17 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.Movements' no tiene definida nin
 advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="ProductCategory">
     <Key>
-      <PropertyRef Name="CategoryID" />
       <PropertyRef Name="ProductID" />
+      <PropertyRef Name="CategoryID" />
     </Key>
-    <Property Name="CategoryID" Type="int" Nullable="false" />
     <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCommentary' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="ProductCommentary">
     <Key>
-      <PropertyRef Name="UserID" />
-      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="ProductCommentaryID" />
     </Key>
+    <Property Name="ProductCommentaryID" Type="int" Nullable="false" />
     <Property Name="UserID" Type="int" Nullable="false" />
     <Property Name="ProductID" Type="int" Nullable="false" />
     <Property Name="Rate" Type="float" />
@@ -97,17 +94,13 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCommentary' no tiene defi
     <Property Name="Description" Type="varchar" MaxLength="200" />
     <Property Name="Existencies" Type="int" />
     <Property Name="Rate" Type="float" />
-    <Property Name="isAution" Type="int" />
+    <Property Name="isAuction" Type="int" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductsSold' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="ProductsSold">
     <Key>
-      <PropertyRef Name="BuyerID" />
-      <PropertyRef Name="SellerID" />
-      <PropertyRef Name="ProductID" />
-      <PropertyRef Name="ShippingID" />
+      <PropertyRef Name="SalesID" />
     </Key>
+    <Property Name="SalesID" Type="int" Nullable="false" />
     <Property Name="BuyerID" Type="int" Nullable="false" />
     <Property Name="SellerID" Type="int" Nullable="false" />
     <Property Name="ProductID" Type="int" Nullable="false" />
@@ -116,13 +109,11 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductsSold' no tiene definida 
     <Property Name="Quantity" Type="int" />
     <Property Name="ShippingID" Type="int" Nullable="false" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ShopBay.dbo.ProfileCommentary' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="ProfileCommentary">
     <Key>
-      <PropertyRef Name="UserID" />
-      <PropertyRef Name="RatedUserID" />
+      <PropertyRef Name="ProfileCommentaryID" />
     </Key>
+    <Property Name="ProfileCommentaryID" Type="int" Nullable="false" />
     <Property Name="UserID" Type="int" Nullable="false" />
     <Property Name="RatedUserID" Type="int" Nullable="false" />
     <Property Name="Rate" Type="float" />
@@ -203,7 +194,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProfileCommentary' no tiene defi
   </Association>
   <Association Name="FK_Movements_Users">
     <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="Movements" Type="Self.Movements" Multiplicity="0..1" />
+    <End Role="Movements" Type="Self.Movements" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserID" />
@@ -373,8 +364,12 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProfileCommentary' no tiene defi
     <EntitySet Name="AdminUsers" EntityType="Self.AdminUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Auction" EntityType="Self.Auction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movements" EntityType="Self.Movements" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OnSaleProducts" EntityType="Self.OnSaleProducts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductCommentary" EntityType="Self.ProductCommentary" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductsSold" EntityType="Self.ProductsSold" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProfileCommentary" EntityType="Self.ProfileCommentary" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShippingOptions" EntityType="Self.ShippingOptions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BidList" EntityType="Self.BidList" store:Type="Tables" store:Schema="dbo">
@@ -390,45 +385,11 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProfileCommentary' no tiene defi
     [ImageCatalog].[ProductImage] AS [ProductImage]
     FROM [dbo].[ImageCatalog] AS [ImageCatalog]</DefiningQuery>
     </EntitySet>
-    <EntitySet Name="Movements" EntityType="Self.Movements" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Movements].[UserID] AS [UserID], 
-    [Movements].[Type] AS [Type], 
-    [Movements].[Ammount] AS [Ammount]
-    FROM [dbo].[Movements] AS [Movements]</DefiningQuery>
-    </EntitySet>
     <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [ProductCategory].[CategoryID] AS [CategoryID], 
-    [ProductCategory].[ProductID] AS [ProductID]
+    [ProductCategory].[ProductID] AS [ProductID], 
+    [ProductCategory].[CategoryID] AS [CategoryID]
     FROM [dbo].[ProductCategory] AS [ProductCategory]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="ProductCommentary" EntityType="Self.ProductCommentary" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [ProductCommentary].[UserID] AS [UserID], 
-    [ProductCommentary].[ProductID] AS [ProductID], 
-    [ProductCommentary].[Rate] AS [Rate], 
-    [ProductCommentary].[Comment] AS [Comment]
-    FROM [dbo].[ProductCommentary] AS [ProductCommentary]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="ProductsSold" EntityType="Self.ProductsSold" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [ProductsSold].[BuyerID] AS [BuyerID], 
-    [ProductsSold].[SellerID] AS [SellerID], 
-    [ProductsSold].[ProductID] AS [ProductID], 
-    [ProductsSold].[BuyDate] AS [BuyDate], 
-    [ProductsSold].[Price] AS [Price], 
-    [ProductsSold].[Quantity] AS [Quantity], 
-    [ProductsSold].[ShippingID] AS [ShippingID]
-    FROM [dbo].[ProductsSold] AS [ProductsSold]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="ProfileCommentary" EntityType="Self.ProfileCommentary" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [ProfileCommentary].[UserID] AS [UserID], 
-    [ProfileCommentary].[RatedUserID] AS [RatedUserID], 
-    [ProfileCommentary].[Rate] AS [Rate], 
-    [ProfileCommentary].[Commentary] AS [Commentary]
-    FROM [dbo].[ProfileCommentary] AS [ProfileCommentary]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Auction_Products" Association="Self.FK_Auction_Products">
       <End Role="Products" EntitySet="Products" />

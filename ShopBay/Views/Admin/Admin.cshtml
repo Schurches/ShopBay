@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+
+<div class="row pt-4">
+    <h4>Publish category</h4>
+    <hr />
+    <div class="col-12">
+        <div class="row">
+            <div class="col-4">
+            <!--Cargar imagen de clase-->
+                <div class="card">
+                    <a href="#" class="">
+                        <img class="card-img-top" src="https://cdn0.vox-cdn.com/uploads/chorus_asset/file/8667595/xboxonex.jpg" alt="user profile" id="profilePicture" />
+                        <div class="card-bodylead">
+                            <div class="bnt btn-primary rounded">
+                                <input type="file" id="uploadFile" value="Upload" name="uploadFile">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="form-group">
+                    <label for="nombreProducto">Cateogry Name</label>
+                    <input type="text" class="form-control" id="nombreProducto" maxlength="60" />
+                </div>
+                <div class="form-group">
+                    <label for="descProduct">Description</label>
+                    <textarea maxlength="60" id="descProduct" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary my-2" type="submit">Plublish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="col-12">
+        <h2 class="lead">Users</h2>
+        <table class="table">
+            <thead class="thead-default">
+                <tr>
+                    <th>#</th>
+                    <th>UserID</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>TypeUser</th>
+                    <th>Rate</th>
+                    <th>Block</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <th>#</th>
+                    <th>3</th>
+                    <th>Johndoe</th>
+                    <th>John</th>
+                    <th>a@o.e</th>
+                    <th>User</th>
+                    <th>3.1</th>
+                    <th><a href="#">Block</a></th>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <hr />
+    <div class="col-12">
+        <h2 class="lead">Products</h2>
+       
+        <table class="table">
+            <thead class="thead-default">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>User</th>
+                    <th>Existencies</th>
+                    <th>Rate</th>
+                    <th>Auctión/th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <th>#</th>
+                    <th>3</th>
+                    <th>Johndoe</th>
+                    <th>John</th>
+                    <th>a@o.e</th>
+                    <th>User</th>
+                    <th>3.1</th>
+                    <th><a href="#">Delete</a></th>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+

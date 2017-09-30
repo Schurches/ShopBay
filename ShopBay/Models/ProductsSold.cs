@@ -14,6 +14,7 @@ namespace ShopBay.Models
     
     public partial class ProductsSold
     {
+        public int SalesID { get; set; }
         public int BuyerID { get; set; }
         public int SellerID { get; set; }
         public int ProductID { get; set; }
