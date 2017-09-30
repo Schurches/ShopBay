@@ -37,5 +37,6 @@ namespace ShopBay.Models
         public virtual DbSet<ProductCommentary> ProductCommentary { get; set; }
         public virtual DbSet<ProductsSold> ProductsSold { get; set; }
         public virtual DbSet<ProfileCommentary> ProfileCommentary { get; set; }
+        public virtual DbSet<AdminUsers> AdminUsers { get; set; }
     }
 }

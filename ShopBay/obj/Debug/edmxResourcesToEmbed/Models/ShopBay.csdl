@@ -49,6 +49,7 @@
     <NavigationProperty Name="Users" Relationship="Self.FK_Products_Users" FromRole="Products" ToRole="Users" />
     <NavigationProperty Name="ProductsSold" Relationship="Self.FK_ProductsSold_Products" FromRole="Products" ToRole="ProductsSold" />
     <NavigationProperty Name="Category" Relationship="Self.ProductCategory" FromRole="Products" ToRole="Category" />
+    <Property Name="isAution" Type="Int32" />
   </EntityType>
   <EntityType Name="ShippingOptions">
     <Key>
@@ -433,5 +434,14 @@
       <End Role="Category" EntitySet="Category" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
+    <EntitySet Name="AdminUsers" EntityType="ShopBayModel.AdminUsers" />
   </EntityContainer>
+  <EntityType Name="AdminUsers">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

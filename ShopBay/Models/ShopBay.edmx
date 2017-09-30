@@ -4,7 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ShopBayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ShopBayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminUsers">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Auction">
           <Key>
             <PropertyRef Name="AuctionID" />
@@ -94,6 +102,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCommentary' no tiene defi
           <Property Name="Description" Type="varchar" MaxLength="200" />
           <Property Name="Existencies" Type="int" />
           <Property Name="Rate" Type="float" />
+          <Property Name="isAution" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductsSold' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -366,6 +375,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProfileCommentary' no tiene defi
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ShopBayModelStoreContainer">
+          <EntitySet Name="AdminUsers" EntityType="Self.AdminUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Auction" EntityType="Self.Auction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OnSaleProducts" EntityType="Self.OnSaleProducts" Schema="dbo" store:Type="Tables" />
@@ -498,8 +508,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProfileCommentary' no tiene defi
             <End Role="ProfileCommentary" EntitySet="ProfileCommentary" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ShopBayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -552,6 +561,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProfileCommentary' no tiene defi
           <NavigationProperty Name="Users" Relationship="Self.FK_Products_Users" FromRole="Products" ToRole="Users" />
           <NavigationProperty Name="ProductsSold" Relationship="Self.FK_ProductsSold_Products" FromRole="Products" ToRole="ProductsSold" />
           <NavigationProperty Name="Category" Relationship="Self.ProductCategory" FromRole="Products" ToRole="Category" />
+          <Property Name="isAution" Type="Int32" />
         </EntityType>
         <EntityType Name="ShippingOptions">
           <Key>
@@ -936,7 +946,16 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProfileCommentary' no tiene defi
             <End Role="Category" EntitySet="Category" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
+          <EntitySet Name="AdminUsers" EntityType="ShopBayModel.AdminUsers" />
         </EntityContainer>
+        <EntityType Name="AdminUsers">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -974,6 +993,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProfileCommentary' no tiene defi
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="ShopBayModel.Products">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="isAution" ColumnName="isAution" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
@@ -1079,6 +1099,15 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProfileCommentary' no tiene defi
               <ScalarProperty Name="ProductID" ColumnName="ProductID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="AdminUsers">
+            <EntityTypeMapping TypeName="ShopBayModel.AdminUsers">
+              <MappingFragment StoreEntitySet="AdminUsers">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

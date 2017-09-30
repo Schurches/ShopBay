@@ -34,6 +34,7 @@
         <AssociationConnector Association="ShopBayModel.FK_ProfileCommentary_Users" ManuallyRouted="false" />
         <AssociationConnector Association="ShopBayModel.FK_ProfileCommentary_Users1" ManuallyRouted="false" />
         <AssociationConnector Association="ShopBayModel.ProductCategory" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ShopBayModel.AdminUsers" Width="1.5" PointX="3.125" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

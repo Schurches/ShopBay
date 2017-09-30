@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ShopBayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AdminUsers">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="Auction">
     <Key>
       <PropertyRef Name="AuctionID" />
@@ -89,6 +97,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCommentary' no tiene defi
     <Property Name="Description" Type="varchar" MaxLength="200" />
     <Property Name="Existencies" Type="int" />
     <Property Name="Rate" Type="float" />
+    <Property Name="isAution" Type="int" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductsSold' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -361,6 +370,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProfileCommentary' no tiene defi
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="ShopBayModelStoreContainer">
+    <EntitySet Name="AdminUsers" EntityType="Self.AdminUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Auction" EntityType="Self.Auction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OnSaleProducts" EntityType="Self.OnSaleProducts" Schema="dbo" store:Type="Tables" />
