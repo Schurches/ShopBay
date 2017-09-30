@@ -561,7 +561,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProfileCommentary' no tiene defi
           <NavigationProperty Name="Users" Relationship="Self.FK_Products_Users" FromRole="Products" ToRole="Users" />
           <NavigationProperty Name="ProductsSold" Relationship="Self.FK_ProductsSold_Products" FromRole="Products" ToRole="ProductsSold" />
           <NavigationProperty Name="Category" Relationship="Self.ProductCategory" FromRole="Products" ToRole="Category" />
-          <Property Name="isAution" Type="Int32" />
+          <Property Name="isAuction" Type="Int32" />
         </EntityType>
         <EntityType Name="ShippingOptions">
           <Key>
@@ -993,7 +993,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProfileCommentary' no tiene defi
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="ShopBayModel.Products">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="isAution" ColumnName="isAution" />
+                <ScalarProperty Name="isAuction" ColumnName="isAution" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />

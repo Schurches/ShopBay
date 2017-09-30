@@ -32,7 +32,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="ShopBayModel.Products">
         <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="isAution" ColumnName="isAution" />
+          <ScalarProperty Name="isAuction" ColumnName="isAution" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Price" ColumnName="Price" />
