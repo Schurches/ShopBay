@@ -1,35 +1,99 @@
-﻿@model ShopBay.Models.RegisterViewModel
+﻿@model ShopBay.Models.Users
 @{
     ViewBag.Title = "Register";
 }
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.AntiForgeryToken()
-    <h4>Join our ShopBay community.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    <div class="row pt-4">
+
+        <div class="col-12">
+            <h3 class="lead">Join our ShopBay community.</h3>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+
+        <div class="col-12">
+            <hr />
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+
+        <!--Cargar imagen de perfil-->
+        <div class="col-lg-4">
+            <div class="card">
+                <a href="#" class="">
+                <img class="card-img-top" src="https://cdn0.vox-cdn.com/uploads/chorus_asset/file/8667595/xboxonex.jpg" alt="user profile" id="profilePicture" />
+                <div class="card-bodylead">
+                    <div class="bnt btn-primary rounded">
+                        <input type="file" id="uploadFile" value="Upload" name="uploadFile">
+                    </div>
+                </div>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-primary my-2" value="Register" />
+        <!--Campo de registro de usuario-->
+        <div class="col-lg-8 row">
+
+                @Html.AntiForgeryToken()
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Name</label>
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>I'm a:</label>
+                        <select class="form-control" id="typeSeller" name="SelectorOption">
+                            <option id="Person">Person</option>
+                            <option id="Company">Company</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        @Html.TextBoxFor(model => model.Information, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Information, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Telephone</label>
+                        @Html.TextBoxFor(model => model.Telephone, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Mail</label>
+                        @Html.TextBoxFor(model => model.Mail, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>User Name</label>
+                        @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Password</label>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-12 pt-1">
+                    <input type="submit" value="Create" class="btn btn-primary form-control col-4" />
+                </div>
         </div>
     </div>
 }
