@@ -11,7 +11,9 @@ namespace ShopBay.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Products
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,16 +25,26 @@ namespace ShopBay.Models
             this.ProductsSold = new HashSet<ProductsSold>();
             this.Category = new HashSet<Category>();
         }
-    
-        public int ProductID { get; set; }
+
+        [Required(ErrorMessage = "Please provide a product name.", AllowEmptyStrings = false)]
+        [MaxLength(60, ErrorMessage = "Product name can not be longer than 60 characters.")]
+        [DisplayName("Product Name")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Please provide a product price", AllowEmptyStrings = false)]
+        [Range(0, int.MaxValue, ErrorMessage = "The product can not be so expensive")]
+        [DisplayName("Price")]
         public Nullable<int> Price { get; set; }
         public int UserID { get; set; }
         public int ShippingID { get; set; }
+        [MaxLength(123, ErrorMessage = "The product description can not be longer than 123 characters.")]
+        [DisplayName("Description")]
         public string Description { get; set; }
+        [Required(ErrorMessage = "Please provide the Quantity value", AllowEmptyStrings = false)]
+        [DisplayName("Quantity")]
         public Nullable<int> Existencies { get; set; }
         public Nullable<double> Rate { get; set; }
         public Nullable<int> isAuction { get; set; }
+        public byte[] image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Auction> Auction { get; set; }

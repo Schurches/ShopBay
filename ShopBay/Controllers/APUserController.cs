@@ -15,6 +15,43 @@ namespace ShopBay.Controllers
             return View();
         }
 
-        
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult APUser(Products newProduct, DateTime DateInput, HttpPostedFileBase inputFile)
+        {
+            ViewBag.Categories = db.Category.ToList();
+            if (ModelState.IsValid)
+            {
+                newProduct.ProductID = db.Products.Count() + 1;
+                newProduct.Rate = 0;
+                newProduct.isAuction = 0;
+                newProduct.UserID = 1;
+                if (Request.Form["selectType"].Equals("Aution"))
+                {
+                    Auction newAution = new Auction();
+                    newAution.AuctionID = db.Auction.Count() + 1;
+                    newAution.CurrentBid = newProduct.Price;
+                    newAution.ProductID = newProduct.ProductID;
+                    newAution.EndDate = DateInput;
+                    db.Auction.Add(newAution);
+                    newProduct.isAuction = 1;
+                }
+                db.Products.Add(newProduct);
+                db.SaveChanges();
+
+                ImageCatalog Images = new ImageCatalog();
+                Images.ProductID = newProduct.ProductID;
+                Images.ProductImage = new byte[inputFile.ContentLength];
+                inputFile.InputStream.Read(Images.ProductImage, 0, inputFile.ContentLength);
+                Images.Products = newProduct;
+                db.ImageCatalog.Add(Images);
+                db.SaveChanges();
+
+                ModelState.Clear();
+            }
+            return View(newProduct);
+        }
+
     }
 }

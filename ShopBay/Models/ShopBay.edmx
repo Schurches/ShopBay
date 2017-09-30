@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ShopBayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ShopBayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdminUsers">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -100,6 +100,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
           <Property Name="Existencies" Type="int" />
           <Property Name="Rate" Type="float" />
           <Property Name="isAuction" Type="int" />
+          <Property Name="image" Type="image" />
         </EntityType>
         <EntityType Name="ProductsSold">
           <Key>
@@ -469,8 +470,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
             <End Role="ProfileCommentary" EntitySet="ProfileCommentary" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ShopBayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -554,6 +554,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
           <NavigationProperty Name="Users" Relationship="Self.FK_Products_Users" FromRole="Products" ToRole="Users" />
           <NavigationProperty Name="ProductsSold" Relationship="Self.FK_ProductsSold_Products" FromRole="Products" ToRole="ProductsSold" />
           <NavigationProperty Name="Category" Relationship="Self.ProductCategory" FromRole="Products" ToRole="Category" />
+          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="ProductsSold">
           <Key>
@@ -984,6 +985,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="ShopBayModel.Products">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />

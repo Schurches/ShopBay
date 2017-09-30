@@ -95,6 +95,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
     <Property Name="Existencies" Type="int" />
     <Property Name="Rate" Type="float" />
     <Property Name="isAuction" Type="int" />
+    <Property Name="image" Type="image" />
   </EntityType>
   <EntityType Name="ProductsSold">
     <Key>

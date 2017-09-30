@@ -80,6 +80,7 @@
     <NavigationProperty Name="Users" Relationship="Self.FK_Products_Users" FromRole="Products" ToRole="Users" />
     <NavigationProperty Name="ProductsSold" Relationship="Self.FK_ProductsSold_Products" FromRole="Products" ToRole="ProductsSold" />
     <NavigationProperty Name="Category" Relationship="Self.ProductCategory" FromRole="Products" ToRole="Category" />
+    <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="ProductsSold">
     <Key>
