@@ -273,3 +273,4 @@ C:\Users\andre\Documents\GitHub\ShopBay\ShopBay\bin\es\Microsoft.Owin.Security.M
 C:\Users\andre\Documents\GitHub\ShopBay\ShopBay\obj\Debug\ShopBay.csproj.CoreCompileInputs.cache
 C:\Users\andre\Documents\GitHub\ShopBay\ShopBay\obj\Debug\ShopBay.dll
 C:\Users\andre\Documents\GitHub\ShopBay\ShopBay\obj\Debug\ShopBay.pdb
+C:\Users\andre\Documents\GitHub\ShopBay\ShopBay\obj\Debug\ShopBay.csprojResolveAssemblyReference.cache

@@ -98,7 +98,7 @@
                         @Html.ValidationMessageFor(model => model.Existencies, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group col-sm-4">
-                        <label for="sProduct">Buy or Auction</label>
+                        <label for="selectTp">Buy or Auction</label>
                         <select class="form-control" onchange="showDate()" id="selectTp" name="selectType">
                             <option>Buy Now</option>
                             <option>Aution</option>
@@ -117,7 +117,7 @@
                         </select>
                     </div>
                     <div id="divDate" style='display:none;' class="form-group col-sm-4">
-                        <label for="categoryProduct">End of Auction</label>
+                        <label>End of Auction</label>
                         <input class="form-control" name="DateInput" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")">
                     </div>
                 </div>

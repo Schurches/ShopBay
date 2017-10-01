@@ -37,16 +37,21 @@ namespace ShopBay.Controllers
                     db.Auction.Add(newAution);
                     newProduct.isAuction = 1;
                 }
-                db.Products.Add(newProduct);
-                db.SaveChanges();
+                newProduct.ShippingID = 1;
+                newProduct.ShippingOptions = db.ShippingOptions.Find(1);
+                newProduct.Users = db.Users.Find(1);
 
                 ImageCatalog Images = new ImageCatalog();
                 Images.ProductID = newProduct.ProductID;
                 Images.ProductImage = new byte[inputFile.ContentLength];
                 inputFile.InputStream.Read(Images.ProductImage, 0, inputFile.ContentLength);
+                newProduct.ImageCatalog = Images;
                 Images.Products = newProduct;
-                db.ImageCatalog.Add(Images);
+
+                db.Products.Add(newProduct);
+
                 db.SaveChanges();
+                
 
                 ModelState.Clear();
             }

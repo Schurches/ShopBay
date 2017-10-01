@@ -25,7 +25,8 @@ namespace ShopBay.Models
             this.ProductsSold = new HashSet<ProductsSold>();
             this.Category = new HashSet<Category>();
         }
-
+    
+        public int ProductID { get; set; }
         [Required(ErrorMessage = "Please provide a product name.", AllowEmptyStrings = false)]
         [MaxLength(60, ErrorMessage = "Product name can not be longer than 60 characters.")]
         [DisplayName("Product Name")]
