@@ -11,7 +11,8 @@ namespace ShopBay.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,17 +29,40 @@ namespace ShopBay.Models
         }
     
         public int UserID { get; set; }
+        [Required(ErrorMessage = "Enter your username", AllowEmptyStrings = false)]
+        [Display(Name = "Username")]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Username must NOT contain white spaces or @")]
+        [StringLength(50, ErrorMessage = "The username must be at least {2} characters long.", MinimumLength = 3)]
         public string Username { get; set; }
+        [Required(ErrorMessage = "Enter your name", AllowEmptyStrings = false)]
+        [Display(Name = "Name")]
+        [StringLength(50, ErrorMessage = "The name must be at least 50 characters characters long.")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "name must only contain letters")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Please Enter your password", AllowEmptyStrings = false)]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long. And must not be pure blanks", MinimumLength = 3)]
+        [Display(Name = "Password")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
         public string Type { get; set; }
+        [Required(ErrorMessage = "Enter your name", AllowEmptyStrings = false)]
+        [Display(Name = "Name")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "name must only contain letters")]
         public string Information { get; set; }
+        [Required(ErrorMessage = "Your must provide a PhoneNumber")]
+        [Display(Name = "Telephone")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
         public string Telephone { get; set; }
+        [Required(ErrorMessage = "Your Email address")]
+        [Display(Name = "Mail")]
+        [RegularExpression(".+@.+\\..+", ErrorMessage = "Please Enter Correct Email Address")]
         public string Mail { get; set; }
         public Nullable<double> Rate { get; set; }
         public Nullable<int> AccMoney { get; set; }
         public byte[] Image { get; set; }
-    
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movements> Movements { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
