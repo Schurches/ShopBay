@@ -44,11 +44,16 @@ namespace ShopBay.Controllers
                     //No se si estos manden error del foreing key, el modelo los tiene y los pongo para llenar todo los campos
                     comentary.Users = user;
                     comentary.Users1 = userR;
-                    var r = db.Users.Find(userR.UserID).Rate;
-                    db.Users.Find(userR.UserID).Rate = (r + comentary.Rate) / 2;
+
+                    var comentaries = db.ProfileCommentary.Where(p => p.RatedUserID == userR.UserID).ToList();
+                    int x = comentaries.Count;
+                    double r = (double)db.Users.Find(userR.UserID).Rate;
+
+                    db.Users.Find(userR.UserID).Rate = (double)(x*r + (double)comentary.Rate) / (x+1);
                     db.ProfileCommentary.Add(comentary);
                     db.SaveChanges();
-                    ViewBag.Comentaries = db.ProfileCommentary.Where(pc => pc.RatedUserID == userR.UserID).ToList();
+
+                    ViewBag.Comentaries = comentaries;
                     ModelState.Clear();
                 }
             }
