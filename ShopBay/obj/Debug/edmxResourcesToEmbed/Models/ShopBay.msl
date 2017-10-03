@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ShopBayModelStoreContainer" CdmEntityContainer="ShopBayEntities">
+  <EntityContainerMapping StorageEntityContainer="ShopBayModelStoreContainer" CdmEntityContainer="ShopBayEntities1">
     <EntitySetMapping Name="AdminUsers">
       <EntityTypeMapping TypeName="ShopBayModel.AdminUsers">
         <MappingFragment StoreEntitySet="AdminUsers">
@@ -17,6 +17,16 @@
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="EndDate" ColumnName="EndDate" />
           <ScalarProperty Name="CurrentBid" ColumnName="CurrentBid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BidList">
+      <EntityTypeMapping TypeName="ShopBayModel.BidList">
+        <MappingFragment StoreEntitySet="BidList">
+          <ScalarProperty Name="BidID" ColumnName="BidID" />
+          <ScalarProperty Name="AuctionID" ColumnName="AuctionID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Bid" ColumnName="Bid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -48,6 +58,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProductCategory">
+      <EntityTypeMapping TypeName="ShopBayModel.ProductCategory">
+        <MappingFragment StoreEntitySet="ProductCategory">
+          <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ProductCommentary">
       <EntityTypeMapping TypeName="ShopBayModel.ProductCommentary">
         <MappingFragment StoreEntitySet="ProductCommentary">
@@ -62,7 +81,6 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="ShopBayModel.Products">
         <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="image" ColumnName="image" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Price" ColumnName="Price" />
@@ -72,6 +90,7 @@
           <ScalarProperty Name="Existencies" ColumnName="Existencies" />
           <ScalarProperty Name="Rate" ColumnName="Rate" />
           <ScalarProperty Name="isAuction" ColumnName="isAuction" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -127,30 +146,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BidList">
-      <EntityTypeMapping TypeName="ShopBayModel.BidList">
-        <MappingFragment StoreEntitySet="BidList">
-          <ScalarProperty Name="AuctionID" ColumnName="AuctionID" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="Bid" ColumnName="Bid" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ImageCatalog">
-      <EntityTypeMapping TypeName="ShopBayModel.ImageCatalog">
-        <MappingFragment StoreEntitySet="ImageCatalog">
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-          <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="ProductCategory" TypeName="ShopBayModel.ProductCategory" StoreEntitySet="ProductCategory">
-      <EndProperty Name="Category">
-        <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-      </EndProperty>
-      <EndProperty Name="Products">
-        <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -8,7 +8,7 @@ namespace ShopBay.Controllers
 {
     public class ProductsController : Controller
     {
-        ShopBayEntities db = new ShopBayEntities();
+        ShopBayEntities1 db = new ShopBayEntities1();
         // GET: Products
         public ActionResult Products(int id)
         {
@@ -18,9 +18,20 @@ namespace ShopBay.Controllers
             var category = db.Category.Find(id);
 
             ViewBag.categoryTitle = category.CategoryTitle;
-            var productsList = category.Products.ToList();
-
-            return View(productsList);
+            var productsList = db.ProductCategory.SqlQuery("SELECT * FROM ProductCategory WHERE CategoryID = " + id).ToList();
+            List<Products> listaDeProductos = new List<Products>();
+            foreach (var item in productsList)
+            {
+                foreach (var otherItem in db.Products)
+                {
+                    if(item.ProductID == otherItem.ProductID)
+                    {
+                        listaDeProductos.Add(otherItem);
+                    }
+                }
+            }
+            ViewBag.listaContenedoraDeProductos = listaDeProductos;
+            return View();
         }
         [HttpPost]
         public ActionResult Products(string keyWords)
@@ -43,13 +54,15 @@ namespace ShopBay.Controllers
                         }
                     }
                 }
-                return View(Resultado.AsQueryable());
+                ViewBag.listaContenedoraDeProductos = Resultado;
+                return View();
             }
             else
             {
                 ViewBag.categoryTitle = "Result of all";
                 var Query = from product in db.Products select product;
-                return View(Query);
+                ViewBag.listaContenedoraDeProductos = Query;
+                return View();
             }
         }
     }

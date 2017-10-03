@@ -43,10 +43,10 @@
                 </div>
             </div>
         </div>
-
+        @using (Html.BeginForm("BuyProduct", "Product", Model, FormMethod.Post))
+        {
         <!--contenedor información del producto-->
         <div class="col-sm-12 col-md-7">
-
             <!--Nombre del vendedor-->
             <div class="py-2">
                 <span class="text-muted">
@@ -61,18 +61,18 @@
 
             <!--Precio del producto-->
             <span class="h3">
-                $<span class="">@Model.Price</span>
+                $<span class="form-group">@Model.Price</span>
             </span>
 
             <!--Descripción del producto-->
-            <p class="pr-4 my-2">@Model.Description</p>
+            <p class="pr-4 my-2 form-group">@Model.Description</p>
 
             <div class="row mt-1">
 
                 <!--Cantidad a comprar-->
-                <div class="form-group col-sm-4">
+                <div class="form-group col-sm-4 form-group">
                     <label for="quantity">Quantity</label>
-                    <input type="number" class="form-control" name="quantity" min="1" max="@Model.Existencies" value="1">
+                    <input type="number" class="form-control form-group" name="quantity" id="quantity" min="1" max="@Model.Existencies" value="1">
                 </div>
 
                 <!--Metodo de envío-->
@@ -112,13 +112,20 @@
 
                 <!--Boton de comprar o o ofrecer se cambia De Buy Now a Offer si está en modo subasta-->
                 <div class="col-md-3">
-                    <button class="btn btn-primary my-2" type="submit">
-                        Buy Now
-                    </button>
+                
+                    @if (Session["UserID"] != null)
+                    {
+                        <input type="submit" value="Buy_Now" class="form-group" />
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Log in into your account to buy this item", "SignIn", "SignIn")
+                    }
+                
                 </div>
             </div>
-            
         </div>
+        }
     </div>
 </div>
 

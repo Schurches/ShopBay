@@ -12,14 +12,13 @@ namespace ShopBay.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BidList
+    public partial class ProductCategory
     {
-        public int BidID { get; set; }
-        public int AuctionID { get; set; }
-        public int UserID { get; set; }
-        public Nullable<int> Bid { get; set; }
+        public int ProductCategoryID { get; set; }
+        public int ProductID { get; set; }
+        public int CategoryID { get; set; }
     
-        public virtual Auction Auction { get; set; }
-        public virtual Users Users { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

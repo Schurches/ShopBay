@@ -21,11 +21,11 @@ namespace ShopBay.Models
         {
             this.Auction = new HashSet<Auction>();
             this.OnSaleProducts = new HashSet<OnSaleProducts>();
+            this.ProductCategory = new HashSet<ProductCategory>();
             this.ProductCommentary = new HashSet<ProductCommentary>();
             this.ProductsSold = new HashSet<ProductsSold>();
-            this.Category = new HashSet<Category>();
         }
-    
+
         public int ProductID { get; set; }
         [Required(ErrorMessage = "Please provide a product name.", AllowEmptyStrings = false)]
         [MaxLength(60, ErrorMessage = "Product name can not be longer than 60 characters.")]
@@ -42,23 +42,22 @@ namespace ShopBay.Models
         public string Description { get; set; }
         [Required(ErrorMessage = "Please provide the Quantity value", AllowEmptyStrings = false)]
         [DisplayName("Quantity")]
-        public Nullable<int> Existencies { get; set; }
-        public Nullable<double> Rate { get; set; }
-        public Nullable<int> isAuction { get; set; }
-        public byte[] image { get; set; }
-    
+        public int Existencies { get; set; }
+        public double Rate { get; set; }
+        public int isAuction { get; set; }
+        public byte[] Image { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Auction> Auction { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OnSaleProducts> OnSaleProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductCategory> ProductCategory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductCommentary> ProductCommentary { get; set; }
-        public virtual ImageCatalog ImageCatalog { get; set; }
         public virtual ShippingOptions ShippingOptions { get; set; }
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductsSold> ProductsSold { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Category { get; set; }
     }
 }

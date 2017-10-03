@@ -1,5 +1,5 @@
 ﻿@using ShopBay.Models
-@model Users
+@model LoginViewModel
 @{
     ViewBag.Title = "Log In";
 }
@@ -7,14 +7,14 @@
 <div class="row pt-4">
     <div class="col-md-8">
         <section id="loginForm">
-            @using (Html.BeginForm("ValidarLogin", "SignIn", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
+                @Html.AntiForgeryToken()
                 <h4 class="lead">Log In with your ShopBay account.</h4>
                 <hr />
-                @Html.AntiForgeryToken()
                 <label>Username</label>
                 <div class="form-group">
-                    <label>Username</label>
+                    @Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
@@ -29,11 +29,19 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Log In" class="btn btn-primary my-2" />
                     </div>
                 </div>
                 <p>
-                    Do not have an account?@Html.ActionLink(" Join us!", "Register")
+                    Do not have an account?@Html.ActionLink("Join us", "Register")
                 </p>
                 @* Habilite esta opción después de habilitar la confirmación de la cuenta para la función de restablecimiento de contraseña
                     <p>

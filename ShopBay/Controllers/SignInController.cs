@@ -11,7 +11,7 @@ namespace ShopBay.Controllers
     public class SignInController : Controller
     {
 
-        ShopBayEntities bd = new ShopBayEntities();
+        ShopBayEntities1 bd = new ShopBayEntities1();
         // GET: SignIn
         public ActionResult SignIn()
         {
@@ -22,12 +22,12 @@ namespace ShopBay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ValidarLogin(Users usuario)
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 var user = bd.Users.ToList();
                 foreach (var item in user)
                 {
-                    if (item.Username == usuario.Username)
+                    if(item.Username == usuario.Username)
                     {
                         if (item.Password.Equals(usuario.Password))
                         {
@@ -46,13 +46,21 @@ namespace ShopBay.Controllers
                     }
                 }
                 ModelState.AddModelError("", "Wrong username or password");
-            //}
-            return RedirectToAction("SignIn","SignIn");
+            }
+            return View(usuario);    
         }
 
         public ActionResult Salir()
         {
             FormsAuthentication.SignOut();
+            var movementsOfUser = bd.Movements.SqlQuery("SELECT * FROM Movements WHERE UserID = " + Session["UserID"]);
+            int currentCash = 0;
+            foreach (var movement in movementsOfUser)
+            {
+                currentCash = currentCash + Convert.ToInt32(movement.Ammount);
+            }
+            bd.Users.Find(Session["UserID"]).AccMoney = currentCash;
+            bd.SaveChanges();
             Session["UserID"] = null;
             Session["Username"] = null;
             Session["Type"] = null;

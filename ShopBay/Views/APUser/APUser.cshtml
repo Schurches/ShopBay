@@ -20,7 +20,6 @@
     function mostrarImagen(event) {
         var files = event.target.files;
         var output = document.getElementById("carouselImages");
-        var indicators = document.getElementById("carouselIndicators");
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
             if (!file.type.match('image')) continue;
@@ -39,7 +38,6 @@
 
                 output.insertBefore(div, null);
             });
-            //Read the image
             picReader.readAsDataURL(file);
         }
     }
@@ -63,8 +61,8 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-                <div class="row mt-1 justify-content-center">
-                    <input class="btn btn-outline-primary my-1 my-sm-0 w-50" type="file" id="inputFile" value="Upload" name="inputFile" style="border-radius:5px" accept="image/*">
+                <div class="bnt btn-primary rounded">
+                    <input type="file" id="inputFile" value="Upload" name="inputFile" accept="image/*">
                 </div>
             </div>
             <div class="col-sm-12 col-md-7">
@@ -98,28 +96,38 @@
                         @Html.ValidationMessageFor(model => model.Existencies, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group col-sm-4">
-                        <label for="selectTp">Buy or Auction</label>
+                        <label for="sProduct">Buy or Auction</label>
                         <select class="form-control" onchange="showDate()" id="selectTp" name="selectType">
                             <option>Buy Now</option>
                             <option>Aution</option>
                         </select>
+                    </div>
+                    <div id="divDate" style='display:none;' class="form-group col-sm-4">
+                        <label for="categoryProduct">End of Auction</label>
+                        <input class="form-control" name="DateInput" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")">
                     </div>
                 </div>
 
                 <div class="row my-1">
                     <div class="form-group col-sm-4">
                         <label for="categoryProduct">Category</label>
-                        <select class="form-control" id="categoryProduct">
+                        <select class="form-control" id="categoryProduct" name="selectCategory">
                             @foreach (var c in ViewBag.Categories)
                             {
                                 <option id="@c.CategoryID">@c.CategoryTitle</option>
                             }
                         </select>
                     </div>
-                    <div id="divDate" style='display:none;' class="form-group col-sm-4">
-                        <label>End of Auction</label>
-                        <input class="form-control" name="DateInput" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")">
+                    <div class="form-group col-sm-4">
+                        <label for="categoryProduct">Shipping</label>
+                        <select class="form-control" id="selectShipping" name="selectShipping">
+                            @foreach (var c in ViewBag.ShippingOP)
+                            {
+                                <option id="@c.ShippingID">@c.ShippingTitle</option>
+                            }
+                        </select>
                     </div>
+
                 </div>
                 <div class="row mt-0">
                     <div class="col-md-3">

@@ -19,6 +19,17 @@
     <NavigationProperty Name="Products" Relationship="Self.FK_Auction_Products" FromRole="Auction" ToRole="Products" />
     <NavigationProperty Name="BidList" Relationship="Self.FK_BidList_Auction" FromRole="Auction" ToRole="BidList" />
   </EntityType>
+  <EntityType Name="BidList">
+    <Key>
+      <PropertyRef Name="BidID" />
+    </Key>
+    <Property Name="BidID" Type="Int32" Nullable="false" />
+    <Property Name="AuctionID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Bid" Type="Int32" />
+    <NavigationProperty Name="Auction" Relationship="Self.FK_BidList_Auction" FromRole="BidList" ToRole="Auction" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_BidList_Users" FromRole="BidList" ToRole="Users" />
+  </EntityType>
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="CategoryID" />
@@ -27,7 +38,7 @@
     <Property Name="CategoryTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="CategoryImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <NavigationProperty Name="Products" Relationship="Self.ProductCategory" FromRole="Category" ToRole="Products" />
+    <NavigationProperty Name="ProductCategory" Relationship="Self.FK_ProductCategory_Category" FromRole="Category" ToRole="ProductCategory" />
   </EntityType>
   <EntityType Name="Movements">
     <Key>
@@ -47,6 +58,16 @@
     <Property Name="ProductID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Products" Relationship="Self.FK_OnSaleProducts_Products" FromRole="OnSaleProducts" ToRole="Products" />
   </EntityType>
+  <EntityType Name="ProductCategory">
+    <Key>
+      <PropertyRef Name="ProductCategoryID" />
+    </Key>
+    <Property Name="ProductCategoryID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_ProductCategory_Category" FromRole="ProductCategory" ToRole="Category" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_ProductCategory_Products" FromRole="ProductCategory" ToRole="Products" />
+  </EntityType>
   <EntityType Name="ProductCommentary">
     <Key>
       <PropertyRef Name="ProductCommentaryID" />
@@ -64,23 +85,22 @@
       <PropertyRef Name="ProductID" />
     </Key>
     <Property Name="ProductID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Price" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
     <Property Name="UserID" Type="Int32" Nullable="false" />
     <Property Name="ShippingID" Type="Int32" Nullable="false" />
-    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Existencies" Type="Int32" />
-    <Property Name="Rate" Type="Double" />
-    <Property Name="isAuction" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Existencies" Type="Int32" Nullable="false" />
+    <Property Name="Rate" Type="Double" Nullable="false" />
+    <Property Name="isAuction" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
     <NavigationProperty Name="Auction" Relationship="Self.FK_Auction_Products" FromRole="Products" ToRole="Auction" />
     <NavigationProperty Name="OnSaleProducts" Relationship="Self.FK_OnSaleProducts_Products" FromRole="Products" ToRole="OnSaleProducts" />
+    <NavigationProperty Name="ProductCategory" Relationship="Self.FK_ProductCategory_Products" FromRole="Products" ToRole="ProductCategory" />
     <NavigationProperty Name="ProductCommentary" Relationship="Self.FK_ProductCommentary_Products" FromRole="Products" ToRole="ProductCommentary" />
-    <NavigationProperty Name="ImageCatalog" Relationship="Self.FK_ImageCatalog_Products" FromRole="Products" ToRole="ImageCatalog" />
     <NavigationProperty Name="ShippingOptions" Relationship="Self.FK_Products_ShippingOptions" FromRole="Products" ToRole="ShippingOptions" />
     <NavigationProperty Name="Users" Relationship="Self.FK_Products_Users" FromRole="Products" ToRole="Users" />
     <NavigationProperty Name="ProductsSold" Relationship="Self.FK_ProductsSold_Products" FromRole="Products" ToRole="ProductsSold" />
-    <NavigationProperty Name="Category" Relationship="Self.ProductCategory" FromRole="Products" ToRole="Category" />
-    <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="ProductsSold">
     <Key>
@@ -137,6 +157,7 @@
     <Property Name="Rate" Type="Double" />
     <Property Name="AccMoney" Type="Int32" />
     <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="BidList" Relationship="Self.FK_BidList_Users" FromRole="Users" ToRole="BidList" />
     <NavigationProperty Name="Movements" Relationship="Self.FK_Movements_Users" FromRole="Users" ToRole="Movements" />
     <NavigationProperty Name="ProductCommentary" Relationship="Self.FK_ProductCommentary_Users" FromRole="Users" ToRole="ProductCommentary" />
     <NavigationProperty Name="Products" Relationship="Self.FK_Products_Users" FromRole="Users" ToRole="Products" />
@@ -144,26 +165,6 @@
     <NavigationProperty Name="ProductsSold1" Relationship="Self.FK_ProductsSold_Users1" FromRole="Users" ToRole="ProductsSold" />
     <NavigationProperty Name="ProfileCommentary" Relationship="Self.FK_ProfileCommentary_Users" FromRole="Users" ToRole="ProfileCommentary" />
     <NavigationProperty Name="ProfileCommentary1" Relationship="Self.FK_ProfileCommentary_Users1" FromRole="Users" ToRole="ProfileCommentary" />
-    <NavigationProperty Name="BidList" Relationship="Self.FK_BidList_Users" FromRole="Users" ToRole="BidList" />
-  </EntityType>
-  <EntityType Name="BidList">
-    <Key>
-      <PropertyRef Name="AuctionID" />
-      <PropertyRef Name="UserID" />
-    </Key>
-    <Property Name="AuctionID" Type="Int32" Nullable="false" />
-    <Property Name="UserID" Type="Int32" Nullable="false" />
-    <Property Name="Bid" Type="Int32" />
-    <NavigationProperty Name="Auction" Relationship="Self.FK_BidList_Auction" FromRole="BidList" ToRole="Auction" />
-    <NavigationProperty Name="Users" Relationship="Self.FK_BidList_Users" FromRole="BidList" ToRole="Users" />
-  </EntityType>
-  <EntityType Name="ImageCatalog">
-    <Key>
-      <PropertyRef Name="ProductID" />
-    </Key>
-    <Property Name="ProductID" Type="Int32" Nullable="false" />
-    <Property Name="ProductImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <NavigationProperty Name="Products" Relationship="Self.FK_ImageCatalog_Products" FromRole="ImageCatalog" ToRole="Products" />
   </EntityType>
   <Association Name="FK_Auction_Products">
     <End Role="Products" Type="Self.Products" Multiplicity="1" />
@@ -186,6 +187,30 @@
       </Principal>
       <Dependent Role="BidList">
         <PropertyRef Name="AuctionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BidList_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="BidList" Type="Self.BidList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="BidList">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductCategory_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="ProductCategory">
+        <PropertyRef Name="CategoryID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -213,6 +238,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ProductCategory_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductCategory">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProductCommentary_Products">
     <End Role="Products" Type="Self.Products" Multiplicity="1" />
     <End Role="ProductCommentary" Type="Self.ProductCommentary" Multiplicity="*" />
@@ -234,18 +271,6 @@
       </Principal>
       <Dependent Role="ProductCommentary">
         <PropertyRef Name="UserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ImageCatalog_Products">
-    <End Role="Products" Type="Self.Products" Multiplicity="1" />
-    <End Role="ImageCatalog" Type="Self.ImageCatalog" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Products">
-        <PropertyRef Name="ProductID" />
-      </Principal>
-      <Dependent Role="ImageCatalog">
-        <PropertyRef Name="ProductID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -345,36 +370,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_BidList_Users">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="BidList" Type="Self.BidList" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="UserID" />
-      </Principal>
-      <Dependent Role="BidList">
-        <PropertyRef Name="UserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ProductCategory">
-    <End Role="Category" Type="Self.Category" Multiplicity="*" />
-    <End Role="Products" Type="Self.Products" Multiplicity="*" />
-  </Association>
-  <EntityContainer Name="ShopBayEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="ShopBayEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AdminUsers" EntityType="Self.AdminUsers" />
     <EntitySet Name="Auction" EntityType="Self.Auction" />
+    <EntitySet Name="BidList" EntityType="Self.BidList" />
     <EntitySet Name="Category" EntityType="Self.Category" />
     <EntitySet Name="Movements" EntityType="Self.Movements" />
     <EntitySet Name="OnSaleProducts" EntityType="Self.OnSaleProducts" />
+    <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" />
     <EntitySet Name="ProductCommentary" EntityType="Self.ProductCommentary" />
     <EntitySet Name="Products" EntityType="Self.Products" />
     <EntitySet Name="ProductsSold" EntityType="Self.ProductsSold" />
     <EntitySet Name="ProfileCommentary" EntityType="Self.ProfileCommentary" />
     <EntitySet Name="ShippingOptions" EntityType="Self.ShippingOptions" />
     <EntitySet Name="Users" EntityType="Self.Users" />
-    <EntitySet Name="BidList" EntityType="Self.BidList" />
-    <EntitySet Name="ImageCatalog" EntityType="Self.ImageCatalog" />
     <AssociationSet Name="FK_Auction_Products" Association="Self.FK_Auction_Products">
       <End Role="Products" EntitySet="Products" />
       <End Role="Auction" EntitySet="Auction" />
@@ -382,6 +391,14 @@
     <AssociationSet Name="FK_BidList_Auction" Association="Self.FK_BidList_Auction">
       <End Role="Auction" EntitySet="Auction" />
       <End Role="BidList" EntitySet="BidList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BidList_Users" Association="Self.FK_BidList_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="BidList" EntitySet="BidList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductCategory_Category" Association="Self.FK_ProductCategory_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="ProductCategory" EntitySet="ProductCategory" />
     </AssociationSet>
     <AssociationSet Name="FK_Movements_Users" Association="Self.FK_Movements_Users">
       <End Role="Users" EntitySet="Users" />
@@ -391,6 +408,10 @@
       <End Role="Products" EntitySet="Products" />
       <End Role="OnSaleProducts" EntitySet="OnSaleProducts" />
     </AssociationSet>
+    <AssociationSet Name="FK_ProductCategory_Products" Association="Self.FK_ProductCategory_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductCategory" EntitySet="ProductCategory" />
+    </AssociationSet>
     <AssociationSet Name="FK_ProductCommentary_Products" Association="Self.FK_ProductCommentary_Products">
       <End Role="Products" EntitySet="Products" />
       <End Role="ProductCommentary" EntitySet="ProductCommentary" />
@@ -398,10 +419,6 @@
     <AssociationSet Name="FK_ProductCommentary_Users" Association="Self.FK_ProductCommentary_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="ProductCommentary" EntitySet="ProductCommentary" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ImageCatalog_Products" Association="Self.FK_ImageCatalog_Products">
-      <End Role="Products" EntitySet="Products" />
-      <End Role="ImageCatalog" EntitySet="ImageCatalog" />
     </AssociationSet>
     <AssociationSet Name="FK_Products_ShippingOptions" Association="Self.FK_Products_ShippingOptions">
       <End Role="ShippingOptions" EntitySet="ShippingOptions" />
@@ -434,14 +451,6 @@
     <AssociationSet Name="FK_ProfileCommentary_Users1" Association="Self.FK_ProfileCommentary_Users1">
       <End Role="Users" EntitySet="Users" />
       <End Role="ProfileCommentary" EntitySet="ProfileCommentary" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BidList_Users" Association="Self.FK_BidList_Users">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="BidList" EntitySet="BidList" />
-    </AssociationSet>
-    <AssociationSet Name="ProductCategory" Association="Self.ProductCategory">
-      <End Role="Category" EntitySet="Category" />
-      <End Role="Products" EntitySet="Products" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

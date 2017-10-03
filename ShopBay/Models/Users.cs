@@ -18,6 +18,7 @@ namespace ShopBay.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Users()
         {
+            this.BidList = new HashSet<BidList>();
             this.Movements = new HashSet<Movements>();
             this.ProductCommentary = new HashSet<ProductCommentary>();
             this.Products = new HashSet<Products>();
@@ -25,9 +26,8 @@ namespace ShopBay.Models
             this.ProductsSold1 = new HashSet<ProductsSold>();
             this.ProfileCommentary = new HashSet<ProfileCommentary>();
             this.ProfileCommentary1 = new HashSet<ProfileCommentary>();
-            this.BidList = new HashSet<BidList>();
         }
-    
+
         public int UserID { get; set; }
         [Required(ErrorMessage = "Enter your username", AllowEmptyStrings = false)]
         [Display(Name = "Username")]
@@ -62,7 +62,8 @@ namespace ShopBay.Models
         public Nullable<int> AccMoney { get; set; }
         public byte[] Image { get; set; }
 
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BidList> BidList { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movements> Movements { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -77,7 +78,5 @@ namespace ShopBay.Models
         public virtual ICollection<ProfileCommentary> ProfileCommentary { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProfileCommentary> ProfileCommentary1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BidList> BidList { get; set; }
     }
 }

@@ -11,21 +11,29 @@ namespace ShopBay.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.Products = new HashSet<Products>();
+            this.ProductCategory = new HashSet<ProductCategory>();
         }
-    
+
         public int CategoryID { get; set; }
+        [Required(ErrorMessage = "Please provide a Cateogry Name.", AllowEmptyStrings = false)]
+        [MaxLength(20, ErrorMessage = "The Cateogry Name can not be longer than 60 characters.")]
+        [DisplayName("Category Name")]
         public string CategoryTitle { get; set; }
+        [Required(ErrorMessage = "Please provide a Cateogry Description.", AllowEmptyStrings = false)]
+        [MaxLength(50, ErrorMessage = "The Cateogry Description can not be longer than 60 characters.")]
+        [DisplayName("Description")]
         public string Description { get; set; }
         public byte[] CategoryImage { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<ProductCategory> ProductCategory { get; set; }
     }
 }

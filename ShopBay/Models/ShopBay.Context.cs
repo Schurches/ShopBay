@@ -13,10 +13,10 @@ namespace ShopBay.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ShopBayEntities : DbContext
+    public partial class ShopBayEntities1 : DbContext
     {
-        public ShopBayEntities()
-            : base("name=ShopBayEntities")
+        public ShopBayEntities1()
+            : base("name=ShopBayEntities1")
         {
         }
     
@@ -27,16 +27,16 @@ namespace ShopBay.Models
     
         public virtual DbSet<AdminUsers> AdminUsers { get; set; }
         public virtual DbSet<Auction> Auction { get; set; }
+        public virtual DbSet<BidList> BidList { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Movements> Movements { get; set; }
         public virtual DbSet<OnSaleProducts> OnSaleProducts { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategory { get; set; }
         public virtual DbSet<ProductCommentary> ProductCommentary { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<ProductsSold> ProductsSold { get; set; }
         public virtual DbSet<ProfileCommentary> ProfileCommentary { get; set; }
         public virtual DbSet<ShippingOptions> ShippingOptions { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<BidList> BidList { get; set; }
-        public virtual DbSet<ImageCatalog> ImageCatalog { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace ShopBay.Controllers
 {
     public class HomeController : Controller
     {
-        ShopBayEntities db = new ShopBayEntities();
+        ShopBayEntities1 db = new ShopBayEntities1();
         public ActionResult Index()
         {
             ViewBag.featuredProducts = db.Products.ToList().GetRange(db.Products.Count()-11,10);

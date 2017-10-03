@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ShopBayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ShopBayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdminUsers">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -22,13 +22,11 @@
           <Property Name="EndDate" Type="date" />
           <Property Name="CurrentBid" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ShopBay.dbo.BidList' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="BidList">
           <Key>
-            <PropertyRef Name="AuctionID" />
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="BidID" />
           </Key>
+          <Property Name="BidID" Type="int" Nullable="false" />
           <Property Name="AuctionID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="Bid" Type="int" />
@@ -41,15 +39,6 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.BidList' no tiene definida ningu
           <Property Name="CategoryTitle" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="200" />
           <Property Name="CategoryImage" Type="image" />
-        </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ShopBay.dbo.ImageCatalog' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="ImageCatalog">
-          <Key>
-            <PropertyRef Name="ProductID" />
-          </Key>
-          <Property Name="ProductID" Type="int" Nullable="false" />
-          <Property Name="ProductImage" Type="image" />
         </EntityType>
         <EntityType Name="Movements">
           <Key>
@@ -67,13 +56,11 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ImageCatalog' no tiene definida 
           <Property Name="SaleID" Type="int" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProductCategory">
           <Key>
-            <PropertyRef Name="ProductID" />
-            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="ProductCategoryID" />
           </Key>
+          <Property Name="ProductCategoryID" Type="int" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
         </EntityType>
@@ -92,15 +79,15 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
             <PropertyRef Name="ProductID" />
           </Key>
           <Property Name="ProductID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Price" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="ShippingID" Type="int" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="200" />
-          <Property Name="Existencies" Type="int" />
-          <Property Name="Rate" Type="float" />
-          <Property Name="isAuction" Type="int" />
-          <Property Name="image" Type="image" />
+          <Property Name="Description" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Existencies" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="float" Nullable="false" />
+          <Property Name="isAuction" Type="int" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="ProductsSold">
           <Key>
@@ -183,18 +170,6 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
             </Principal>
             <Dependent Role="BidList">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ImageCatalog_Products">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="ImageCatalog" Type="Self.ImageCatalog" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="ImageCatalog">
-              <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -369,34 +344,17 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
         <EntityContainer Name="ShopBayModelStoreContainer">
           <EntitySet Name="AdminUsers" EntityType="Self.AdminUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Auction" EntityType="Self.Auction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BidList" EntityType="Self.BidList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movements" EntityType="Self.Movements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OnSaleProducts" EntityType="Self.OnSaleProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductCommentary" EntityType="Self.ProductCommentary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductsSold" EntityType="Self.ProductsSold" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileCommentary" EntityType="Self.ProfileCommentary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShippingOptions" EntityType="Self.ShippingOptions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BidList" EntityType="Self.BidList" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [BidList].[AuctionID] AS [AuctionID], 
-    [BidList].[UserID] AS [UserID], 
-    [BidList].[Bid] AS [Bid]
-    FROM [dbo].[BidList] AS [BidList]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="ImageCatalog" EntityType="Self.ImageCatalog" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ImageCatalog].[ProductID] AS [ProductID], 
-    [ImageCatalog].[ProductImage] AS [ProductImage]
-    FROM [dbo].[ImageCatalog] AS [ImageCatalog]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ProductCategory].[ProductID] AS [ProductID], 
-    [ProductCategory].[CategoryID] AS [CategoryID]
-    FROM [dbo].[ProductCategory] AS [ProductCategory]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Auction_Products" Association="Self.FK_Auction_Products">
             <End Role="Products" EntitySet="Products" />
             <End Role="Auction" EntitySet="Auction" />
@@ -408,10 +366,6 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
           <AssociationSet Name="FK_BidList_Users" Association="Self.FK_BidList_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="BidList" EntitySet="BidList" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ImageCatalog_Products" Association="Self.FK_ImageCatalog_Products">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="ImageCatalog" EntitySet="ImageCatalog" />
           </AssociationSet>
           <AssociationSet Name="FK_Movements_Users" Association="Self.FK_Movements_Users">
             <End Role="Users" EntitySet="Users" />
@@ -470,7 +424,8 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
             <End Role="ProfileCommentary" EntitySet="ProfileCommentary" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ShopBayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -493,6 +448,17 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
           <NavigationProperty Name="Products" Relationship="Self.FK_Auction_Products" FromRole="Auction" ToRole="Products" />
           <NavigationProperty Name="BidList" Relationship="Self.FK_BidList_Auction" FromRole="Auction" ToRole="BidList" />
         </EntityType>
+        <EntityType Name="BidList">
+          <Key>
+            <PropertyRef Name="BidID" />
+          </Key>
+          <Property Name="BidID" Type="Int32" Nullable="false" />
+          <Property Name="AuctionID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Bid" Type="Int32" />
+          <NavigationProperty Name="Auction" Relationship="Self.FK_BidList_Auction" FromRole="BidList" ToRole="Auction" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_BidList_Users" FromRole="BidList" ToRole="Users" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryID" />
@@ -501,7 +467,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
           <Property Name="CategoryTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CategoryImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Products" Relationship="Self.ProductCategory" FromRole="Category" ToRole="Products" />
+          <NavigationProperty Name="ProductCategory" Relationship="Self.FK_ProductCategory_Category" FromRole="Category" ToRole="ProductCategory" />
         </EntityType>
         <EntityType Name="Movements">
           <Key>
@@ -521,6 +487,16 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Products" Relationship="Self.FK_OnSaleProducts_Products" FromRole="OnSaleProducts" ToRole="Products" />
         </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="ProductCategoryID" />
+          </Key>
+          <Property Name="ProductCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_ProductCategory_Category" FromRole="ProductCategory" ToRole="Category" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_ProductCategory_Products" FromRole="ProductCategory" ToRole="Products" />
+        </EntityType>
         <EntityType Name="ProductCommentary">
           <Key>
             <PropertyRef Name="ProductCommentaryID" />
@@ -538,23 +514,22 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
             <PropertyRef Name="ProductID" />
           </Key>
           <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Price" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="ShippingID" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Existencies" Type="Int32" />
-          <Property Name="Rate" Type="Double" />
-          <Property Name="isAuction" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Existencies" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Double" Nullable="false" />
+          <Property Name="isAuction" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Auction" Relationship="Self.FK_Auction_Products" FromRole="Products" ToRole="Auction" />
           <NavigationProperty Name="OnSaleProducts" Relationship="Self.FK_OnSaleProducts_Products" FromRole="Products" ToRole="OnSaleProducts" />
+          <NavigationProperty Name="ProductCategory" Relationship="Self.FK_ProductCategory_Products" FromRole="Products" ToRole="ProductCategory" />
           <NavigationProperty Name="ProductCommentary" Relationship="Self.FK_ProductCommentary_Products" FromRole="Products" ToRole="ProductCommentary" />
-          <NavigationProperty Name="ImageCatalog" Relationship="Self.FK_ImageCatalog_Products" FromRole="Products" ToRole="ImageCatalog" />
           <NavigationProperty Name="ShippingOptions" Relationship="Self.FK_Products_ShippingOptions" FromRole="Products" ToRole="ShippingOptions" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Products_Users" FromRole="Products" ToRole="Users" />
           <NavigationProperty Name="ProductsSold" Relationship="Self.FK_ProductsSold_Products" FromRole="Products" ToRole="ProductsSold" />
-          <NavigationProperty Name="Category" Relationship="Self.ProductCategory" FromRole="Products" ToRole="Category" />
-          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="ProductsSold">
           <Key>
@@ -611,6 +586,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
           <Property Name="Rate" Type="Double" />
           <Property Name="AccMoney" Type="Int32" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="BidList" Relationship="Self.FK_BidList_Users" FromRole="Users" ToRole="BidList" />
           <NavigationProperty Name="Movements" Relationship="Self.FK_Movements_Users" FromRole="Users" ToRole="Movements" />
           <NavigationProperty Name="ProductCommentary" Relationship="Self.FK_ProductCommentary_Users" FromRole="Users" ToRole="ProductCommentary" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_Users" FromRole="Users" ToRole="Products" />
@@ -618,26 +594,6 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
           <NavigationProperty Name="ProductsSold1" Relationship="Self.FK_ProductsSold_Users1" FromRole="Users" ToRole="ProductsSold" />
           <NavigationProperty Name="ProfileCommentary" Relationship="Self.FK_ProfileCommentary_Users" FromRole="Users" ToRole="ProfileCommentary" />
           <NavigationProperty Name="ProfileCommentary1" Relationship="Self.FK_ProfileCommentary_Users1" FromRole="Users" ToRole="ProfileCommentary" />
-          <NavigationProperty Name="BidList" Relationship="Self.FK_BidList_Users" FromRole="Users" ToRole="BidList" />
-        </EntityType>
-        <EntityType Name="BidList">
-          <Key>
-            <PropertyRef Name="AuctionID" />
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="AuctionID" Type="Int32" Nullable="false" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Bid" Type="Int32" />
-          <NavigationProperty Name="Auction" Relationship="Self.FK_BidList_Auction" FromRole="BidList" ToRole="Auction" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_BidList_Users" FromRole="BidList" ToRole="Users" />
-        </EntityType>
-        <EntityType Name="ImageCatalog">
-          <Key>
-            <PropertyRef Name="ProductID" />
-          </Key>
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="ProductImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_ImageCatalog_Products" FromRole="ImageCatalog" ToRole="Products" />
         </EntityType>
         <Association Name="FK_Auction_Products">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
@@ -660,6 +616,30 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
             </Principal>
             <Dependent Role="BidList">
               <PropertyRef Name="AuctionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BidList_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="BidList" Type="Self.BidList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="BidList">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCategory_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="ProductCategory">
+              <PropertyRef Name="CategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -687,6 +667,18 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductCategory_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductCategory">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductCommentary_Products">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="ProductCommentary" Type="Self.ProductCommentary" Multiplicity="*" />
@@ -708,18 +700,6 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
             </Principal>
             <Dependent Role="ProductCommentary">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ImageCatalog_Products">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="ImageCatalog" Type="Self.ImageCatalog" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="ImageCatalog">
-              <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -819,36 +799,20 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BidList_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="BidList" Type="Self.BidList" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="BidList">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ProductCategory">
-          <End Role="Category" Type="Self.Category" Multiplicity="*" />
-          <End Role="Products" Type="Self.Products" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="ShopBayEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ShopBayEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AdminUsers" EntityType="Self.AdminUsers" />
           <EntitySet Name="Auction" EntityType="Self.Auction" />
+          <EntitySet Name="BidList" EntityType="Self.BidList" />
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="Movements" EntityType="Self.Movements" />
           <EntitySet Name="OnSaleProducts" EntityType="Self.OnSaleProducts" />
+          <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" />
           <EntitySet Name="ProductCommentary" EntityType="Self.ProductCommentary" />
           <EntitySet Name="Products" EntityType="Self.Products" />
           <EntitySet Name="ProductsSold" EntityType="Self.ProductsSold" />
           <EntitySet Name="ProfileCommentary" EntityType="Self.ProfileCommentary" />
           <EntitySet Name="ShippingOptions" EntityType="Self.ShippingOptions" />
           <EntitySet Name="Users" EntityType="Self.Users" />
-          <EntitySet Name="BidList" EntityType="Self.BidList" />
-          <EntitySet Name="ImageCatalog" EntityType="Self.ImageCatalog" />
           <AssociationSet Name="FK_Auction_Products" Association="Self.FK_Auction_Products">
             <End Role="Products" EntitySet="Products" />
             <End Role="Auction" EntitySet="Auction" />
@@ -856,6 +820,14 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
           <AssociationSet Name="FK_BidList_Auction" Association="Self.FK_BidList_Auction">
             <End Role="Auction" EntitySet="Auction" />
             <End Role="BidList" EntitySet="BidList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BidList_Users" Association="Self.FK_BidList_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BidList" EntitySet="BidList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCategory_Category" Association="Self.FK_ProductCategory_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
           </AssociationSet>
           <AssociationSet Name="FK_Movements_Users" Association="Self.FK_Movements_Users">
             <End Role="Users" EntitySet="Users" />
@@ -865,6 +837,10 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
             <End Role="Products" EntitySet="Products" />
             <End Role="OnSaleProducts" EntitySet="OnSaleProducts" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProductCategory_Products" Association="Self.FK_ProductCategory_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductCommentary_Products" Association="Self.FK_ProductCommentary_Products">
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductCommentary" EntitySet="ProductCommentary" />
@@ -872,10 +848,6 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
           <AssociationSet Name="FK_ProductCommentary_Users" Association="Self.FK_ProductCommentary_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="ProductCommentary" EntitySet="ProductCommentary" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ImageCatalog_Products" Association="Self.FK_ImageCatalog_Products">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="ImageCatalog" EntitySet="ImageCatalog" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_ShippingOptions" Association="Self.FK_Products_ShippingOptions">
             <End Role="ShippingOptions" EntitySet="ShippingOptions" />
@@ -909,21 +881,13 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
             <End Role="Users" EntitySet="Users" />
             <End Role="ProfileCommentary" EntitySet="ProfileCommentary" />
           </AssociationSet>
-          <AssociationSet Name="FK_BidList_Users" Association="Self.FK_BidList_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="BidList" EntitySet="BidList" />
-          </AssociationSet>
-          <AssociationSet Name="ProductCategory" Association="Self.ProductCategory">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ShopBayModelStoreContainer" CdmEntityContainer="ShopBayEntities">
+        <EntityContainerMapping StorageEntityContainer="ShopBayModelStoreContainer" CdmEntityContainer="ShopBayEntities1">
           <EntitySetMapping Name="AdminUsers">
             <EntityTypeMapping TypeName="ShopBayModel.AdminUsers">
               <MappingFragment StoreEntitySet="AdminUsers">
@@ -940,6 +904,16 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="CurrentBid" ColumnName="CurrentBid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BidList">
+            <EntityTypeMapping TypeName="ShopBayModel.BidList">
+              <MappingFragment StoreEntitySet="BidList">
+                <ScalarProperty Name="BidID" ColumnName="BidID" />
+                <ScalarProperty Name="AuctionID" ColumnName="AuctionID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Bid" ColumnName="Bid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -971,6 +945,15 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategory">
+            <EntityTypeMapping TypeName="ShopBayModel.ProductCategory">
+              <MappingFragment StoreEntitySet="ProductCategory">
+                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProductCommentary">
             <EntityTypeMapping TypeName="ShopBayModel.ProductCommentary">
               <MappingFragment StoreEntitySet="ProductCommentary">
@@ -985,7 +968,6 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="ShopBayModel.Products">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
@@ -995,6 +977,7 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
                 <ScalarProperty Name="Existencies" ColumnName="Existencies" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="isAuction" ColumnName="isAuction" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1050,31 +1033,6 @@ advertencia 6002: La tabla o vista 'ShopBay.dbo.ProductCategory' no tiene defini
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BidList">
-            <EntityTypeMapping TypeName="ShopBayModel.BidList">
-              <MappingFragment StoreEntitySet="BidList">
-                <ScalarProperty Name="AuctionID" ColumnName="AuctionID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Bid" ColumnName="Bid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ImageCatalog">
-            <EntityTypeMapping TypeName="ShopBayModel.ImageCatalog">
-              <MappingFragment StoreEntitySet="ImageCatalog">
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="ProductCategory" TypeName="ShopBayModel.ProductCategory" StoreEntitySet="ProductCategory">
-            <EndProperty Name="Category">
-              <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-            </EndProperty>
-            <EndProperty Name="Products">
-              <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
