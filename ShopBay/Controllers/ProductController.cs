@@ -12,29 +12,12 @@ namespace ShopBay.Controllers
     {
         ShopBayEntities1 db = new ShopBayEntities1();
         // GET: Product
-
-
-        public ActionResult Product()
-        {
-            return View();
-        }
-
-
         public ActionResult Product(int id)
         {
             var product = db.Products.Find(id);
             ViewBag.Seller = db.Users.Find(product.UserID);
             ViewBag.isAuction = product.isAuction;
-            var executedQuery = db.ProductCategory.SqlQuery("SELECT * FROM ProductCategory WHERE ProductID = " + id).Single();
-            ViewBag.productInstance = product;
-            foreach (var item in db.Category)
-            {
-                if(item.CategoryID == executedQuery.CategoryID)
-                {
-                    ViewBag.Category = item;
-                    return View(product);
-                }
-            }
+            ViewBag.Category = db.ProductCategory.SqlQuery("SELECT * FROM ProductCategory WHERE ProductID = " + id).Single().Category;
             return View(product);
         }
 

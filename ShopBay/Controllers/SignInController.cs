@@ -22,32 +22,29 @@ namespace ShopBay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ValidarLogin(Users usuario)
         {
-            if (ModelState.IsValid)
+            var user = bd.Users.ToList();
+            foreach (var item in user)
             {
-                var user = bd.Users.ToList();
-                foreach (var item in user)
+                if(item.Username == usuario.Username)
                 {
-                    if(item.Username == usuario.Username)
+                    if (item.Password.Equals(usuario.Password))
                     {
-                        if (item.Password.Equals(usuario.Password))
-                        {
-                            FormsAuthentication.SetAuthCookie(usuario.Username, true);
-                            Session["UserID"] = item.UserID;
-                            Session["Username"] = item.Username;
-                            Session["Type"] = item.Type;
-                            Session["Telephone"] = item.Telephone;
-                            Session["Rate"] = item.Rate;
-                            Session["Mail"] = item.Mail;
-                            Session["Information"] = item.Information;
-                            Session["AccMoney"] = item.AccMoney;
-                            Session["Image"] = item.Image;
-                            return RedirectToAction("Index", "Home");
-                        }
+                        FormsAuthentication.SetAuthCookie(usuario.Username, true);
+                        Session["UserID"] = item.UserID;
+                        Session["Username"] = item.Username;
+                        Session["Type"] = item.Type;
+                        Session["Telephone"] = item.Telephone;
+                        Session["Rate"] = item.Rate;
+                        Session["Mail"] = item.Mail;
+                        Session["Information"] = item.Information;
+                        Session["AccMoney"] = item.AccMoney;
+                        Session["Image"] = item.Image;
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                 ModelState.AddModelError("", "Wrong username or password");
             }
-            return View(usuario);    
+            return View();    
         }
 
         public ActionResult Salir()
