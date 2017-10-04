@@ -43,15 +43,15 @@
                 </div>
             </div>
         </div>
-
-@using (Html.BeginForm("BuyProduct", "Product", Model, FormMethod.Post, new { @class = "col-sm-12 col-md-7" }))
-{
+        @using (Html.BeginForm("BuyProduct", "Product", Model, FormMethod.Post))
+        {
         <!--contenedor información del producto-->
+        <div class="col-sm-12 col-md-7">
             <!--Nombre del vendedor-->
             <div class="py-2">
                 <span class="text-muted">
                     Seller:
-                </span><a href="@Url.Action("ProfileU", "ProfileU", new { id = ViewBag.Seller.UserID })" class="">@ViewBag.Seller.Username</a>
+                </span><a href="@Url.Action("ProfileU","ProfileU",new { id=ViewBag.Seller.UserID})" class="">@ViewBag.Seller.Username</a>
             </div>
             <!--Calificación del produto-->
             <span class="text-muted align-middle">@Model.Rate</span><span class="text-muted align-middle pl-2">product rating</span>
@@ -70,11 +70,13 @@
             <div class="row mt-1">
 
                 <!--Cantidad a comprar-->
+                @if (Model.isAuction == 0)
+                {
                 <div class="form-group col-sm-4 form-group">
                     <label for="quantity">Quantity</label>
                     <input type="number" class="form-control form-group" name="quantity" id="quantity" min="1" max="@Model.Existencies" value="1">
                 </div>
-
+                }
                 <!--Metodo de envío-->
                 <div class="form-group col-sm-4">
                     <label for="Send">Shipping </label>
@@ -84,16 +86,16 @@
                     </select>
                 </div>
             </div>
-    if (ViewBag.isAuction == 1)
-    {
+            @if (ViewBag.isAuction == 1)
+            {
                <!--Estado del producto-->
                <time class="text-muted px-0 my-2">Auction time:</time><time class="px-2">0000-00-00T00:00</time>
-    }
+            }
             <div class="row my-0 justify-content-between mt-3 mb-1">
                 <!--Categoria a la que pertenece-->
                 <div class="form-group col-sm-6">
                     <span class="text-muted">Categories:</span>
-                    <a class="navi-link" href="@Url.Action("Products", "Products", new { id = ViewBag.Category.CategoryID })">@ViewBag.Category.CategoryTitle</a>
+                    <a class="navi-link" href="@Url.Action( "Products", "Products" , new { id=ViewBag.Category.CategoryID})">@ViewBag.Category.CategoryTitle</a>
                 </div>
                 <!--Identificador del producto-->
                 <div class="form-group col-sm-6">
@@ -103,27 +105,34 @@
 
             <div class="row my-0 py-0">
                 <!--Cmapo para ofrecer precio de comprar, aparece si está subastado, se quit si el producto solo está a la venta-->
-                @if (ViewBag.isAuction == 1 && Session["UserID"] != null)
+                @if (ViewBag.isAuction == 1)
                 {
                     <div class="form-group col-md-3">
-                        <input type="text" class="form-control my-2" id="auction" maxlength="12" />
+                        <input type="text" class="form-control my-2" id="auction" name="auction" maxlength="12" />
                     </div>
                 }
+
                 <!--Boton de comprar o o ofrecer se cambia De Buy Now a Offer si está en modo subasta-->
-                @if (Session["UserID"] != null)
-                {
-                    <div class="col-md-3">
-                        <input type="submit" value="Buy_Now" class="form-group btn btn-primary" />
-                    </div>
-                }
-                else
-                {
-                    <div class="col-12">
-                        <span class="form-group text-dark">Log in to buy</span>
-                    </div>
-                }
+                <div class="col-md-3">
+                
+                    @if (Model.Existencies != 0)
+                    {
+                        if (Session["UserID"] != null)
+                        {
+                            <input type="submit" value="Buy_Now" class="form-group" />
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Log in into your account to buy this item", "SignIn", "SignIn")
+                        }
+                    }else
+                    {
+                        <span> All existencies of this products were sold. </span>
+                    }
+                </div>
             </div>
-}
+        </div>
+        }
     </div>
 </div>
 

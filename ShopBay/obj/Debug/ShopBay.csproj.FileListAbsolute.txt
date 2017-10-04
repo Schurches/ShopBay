@@ -685,4 +685,3 @@ C:\Users\steven\Desktop\FINAL\ShopBay\bin\es\Microsoft.Owin.Security.MicrosoftAc
 C:\Users\steven\Desktop\FINAL\ShopBay\obj\Debug\ShopBay.csprojResolveAssemblyReference.cache
 C:\Users\steven\Desktop\FINAL\ShopBay\obj\Debug\ShopBay.dll
 C:\Users\steven\Desktop\FINAL\ShopBay\obj\Debug\ShopBay.pdb
-C:\Users\andre\Documents\GitHub\ShopBay\ShopBay\obj\Debug\ShopBay.csprojResolveAssemblyReference.cache

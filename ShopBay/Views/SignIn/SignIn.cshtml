@@ -14,22 +14,31 @@
                 @Html.AntiForgeryToken()
                 <label>Username</label>
                 <div class="form-group">
-                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control col-lg-7" })
-                    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                    <label>Username</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                <label>Password</label>
                 <div class="form-group">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control col-lg-7" })
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    <label>Password</label>
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                <div class="form-group pl-0">
-                    <div class="pl-0">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Log In" class="btn btn-primary my-2" />
                     </div>
                 </div>
                 <p>
-                    Do not have an account?@Html.ActionLink(" Join us!", "Register", "Account")
+                    Do not have an account?@Html.ActionLink(" Join us!", "Register")
                 </p>
+                @* Habilite esta opción después de habilitar la confirmación de la cuenta para la función de restablecimiento de contraseña
+                    <p>
+                        @Html.ActionLink("¿Ha olvidado su contraseña?", "ForgotPassword")
+                    </p>*@
             }
         </section>
     </div>

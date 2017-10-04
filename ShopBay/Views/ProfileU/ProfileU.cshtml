@@ -1,4 +1,4 @@
-﻿@model ShopBay.Models.ProfileCommentary
+﻿@model ShopBay.Models.Users
 @{
     ViewBag.Title = "Profile";
 }
@@ -10,12 +10,12 @@
         <!--foto del perfil-->
         <div class="col-md-4">
             <div class="card">
-                <img class="card-img-top" src="https://cdn0.vox-cdn.com/uploads/chorus_asset/file/8667595/xboxonex.jpg" alt="ProfileImage" />
-                <span class="card-title text-center lead">@ViewBag.User.Username</span>
-                <span class="card-title text-center lead">@ViewBag.User.Rate</span>
+                    <img class="card-img-top" src="https://cdn0.vox-cdn.com/uploads/chorus_asset/file/8667595/xboxonex.jpg" alt="ProfileImage" />
+                    <span class="card-title text-center lead">@Model.Username</span>
+                    <span class="card-title text-center lead">@Model.Rate</span>
             </div>
         </div>
-        <!--Información basica del usuario-->
+            <!--Información basica del usuario-->
         <div class="col-md-8">
 
             <div class="container">
@@ -24,51 +24,39 @@
                 <!--Contenedor comentarios-->
                 <div class="row">
                     <!--Plantilla de comentario-->
-                    @if (ViewBag.Comentaries.Count > 0)
-                    {
-                        foreach (var c in ViewBag.Comentaries)
-                        {
-                            <div class=" col-12  bg-dark my-2" style="border-radius:15px">
-                                <div class="row">
-                                    <div class="col-lg-2 col-md-3 col-sm-4">
-                                        <img src="http://bootdey.com/img/Content/user_1.jpg" class="rounded card-img float-left" alt="user profile image" style="max-height:100px;max-width:117px;min-height:90px;min-width:90px">
-                                    </div>
-                                    <div class="col-lg-10 col-md-9 col-sm-8">
-                                        <a href="@Url.Action("ProfileU","ProfileU",new { id=c.Users.UserID })"><b>@c.Users.Name</b></a>
-                                        <p class="text-light pt-1 mb-0">@c.Commentary</p>
-                                        <span class="text-muted py-0 my-0">@c.Rate</span>
-                                    </div>
-                                </div>
+                    <div class=" col-12  bg-dark my-2" style="border-radius:15px">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-3 col-sm-4">
+                                <img src="http://bootdey.com/img/Content/user_1.jpg" class="rounded card-img float-left" alt="user profile image" style="max-height:100px;max-width:117px;min-height:90px;min-width:90px">
                             </div>
-                        }
-                    }
-                    else
-                    {
-                        <h2>No comentaries</h2>
-                    }
+                            <div class="col-lg-10 col-md-9 col-sm-8">
+                                <a href="#"><b>Jon Dou</b></a>
+                                <p class="text-light pt-1 mb-0">Está muy elegante este producto simplemente el mejor muy elegante este producto simplemente el mejor</p>
+                                <span class="text-muted py-0 my-0">4.5</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <hr />
-                @using (Html.BeginForm("ProfileU", "ProfileU", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
                 <!--Formulario de feedback-->
-                    <form class="row">
-                        <span class="h1 lead">Feedback</span>
-                        @Html.EditorFor(model => model.Commentary, new { htmlAttributes = new { @class = "form-control" } })
-                        <!--<textarea maxlength="123" id="coment" name="comentary" class="form-control col-12 bg-dark text-light" style="resize:none;border-radius:15px" placeholder="Your comment here!"></textarea>-->
-                        <!--calificación por feedback-->
-                        <select class="form-control my-2 ml-2 col-sm-3 col-md-2" style="border-radius:15px" name="rateUserC" id="rateUSerC">
-                            <option>5</option>
-                            <option>4</option>
-                            <option>3</option>
-                            <option>2</option>
-                            <option>1</option>
-                        </select>
-                        <button class="form-control btn btn-primary my-2 ml-2 col-sm-3 col-md-2" type="submit" style="border-radius:15px">
-                            Send
-                        </button>
-                    </form>
-                }
+                <form class="row">
+                    <span class="h1 lead">Feedback</span>
+                    <textarea maxlength="123" id="coment" class="form-control col-12 bg-dark text-light" style="resize:none;border-radius:15px" placeholder="Your comment here!"></textarea>
+                    <!--calificación por feedback-->
+                    <select class="form-control my-2 ml-2 col-sm-3 col-md-2" style="border-radius:15px">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                    <button class="form-control btn btn-primary my-2 ml-2 col-sm-3 col-md-2" type="submit" style="border-radius:15px">
+                        Send
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+

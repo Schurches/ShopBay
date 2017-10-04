@@ -1,19 +1,22 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Session["UserID"] != null)
 {
-
+    
     @Html.AntiForgeryToken()
 
-
-    <div class="navbar-nav mr-auto col-sm-12 col-md-3 justify-content-end">
-        <a href="@Url.Action("ProfileU/" + Session["UserID"], "ProfileU")" class="nav-item nav-link">@Session["Username"]</a>
-        <a href="@Url.Action("Salir","SignIn")" class="nav-item nav-link">Log out</a>
-    </div>
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink("Welcole " + Session["Username"] + "!  ", "ProfileU/"+Session["UserID"], "ProfileU")
+        </li>
+        <li>
+            @Html.ActionLink("Log out", "Salir", "SignIn")
+        </li>
+    </ul>
 }
 else
 {
-    <div class="navbar-nav mr-auto col-sm-12 col-md-3 justify-content-end">
-        <a href="@Url.Action("SignIn", "SignIn")" class="nav-item nav-link" id="loginLink">Log In</a>
+    <div  class="navbar-nav mr-auto col-sm-12 col-md-3 justify-content-end">
+        <a href="@Url.Action("SignIn", "SignIn")" class="nav-item nav-link" id = "loginLink">Log In</a>
         <a href="@Url.Action("Register", "Account")" class="nav-item nav-link" id="registerLink">Register</a>
     </div>
 }
