@@ -29,9 +29,8 @@ namespace ShopBay.Controllers
                 Session["AccMoney"] = Convert.ToInt32(Session["AccMoney"]) + plata;
                 db.Movements.Add(mov);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Home");
             }
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
     }

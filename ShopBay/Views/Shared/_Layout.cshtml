@@ -67,13 +67,12 @@
                 </div>
                 <div class="col-5 pb-1">
                     <!--Subscription-->
-                    @Html.BeginForm("CanjearPlata", "Home")
-                    {
-                        <div class="row">
+                    <div class="row">
+                        @Html.BeginForm("CanjearPlata", "Home"){
                             <input class="col-7 bg-dark text-light my-4 py-3" type="text" name="canjear" placeholder="$20000" style="border-radius:20px">
-                            <input type="submit" class="btn btn-primary col-4 my-4 py-3 ml-1" style="border-radius:20px"/>
-                        </div>
-                    }
+                            <input type="submit" class="btn btn-primary col-4 my-4 py-3 ml-1" style="border-radius:20px" />
+                        }
+                    </div>
                     <span class="text-light">Subscribe to our Newsletter to receive early discount offers, latest news, sales and promo information.</span>
                 </div>
             </div>

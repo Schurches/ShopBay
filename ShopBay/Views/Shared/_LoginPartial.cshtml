@@ -1,10 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Session["UserID"] != null)
 {
-
     @Html.AntiForgeryToken()
-
-
     <div class="navbar-nav mr-auto col-sm-12 col-md-3 justify-content-end">
         <a href="@Url.Action("ProfileU/" + Session["UserID"], "ProfileU")" class="nav-item nav-link">@Session["Username"]</a>
         <span class="nav-item nav-link">Money: $ @Session["AccMoney"]</span>
@@ -13,8 +10,19 @@
 }
 else
 {
-    <div class="navbar-nav mr-auto col-sm-12 col-md-3 justify-content-end">
-        <a href="@Url.Action("SignIn", "SignIn")" class="nav-item nav-link" id="loginLink">Log In</a>
-        <a href="@Url.Action("Register", "Account")" class="nav-item nav-link" id="registerLink">Register</a>
-    </div>
+    if (Session["isAdmin"] != null)
+    {
+        <div class="navbar-nav mr-auto col-sm-12 col-md-3 justify-content-end">
+            <span class="text-danger" color="red">[Admin]</span>
+            <a href="@Url.Action("Admin", "Admin")" class="nav-item nav-link">@Session["AdminName"]</a>
+            <a href="@Url.Action("SalirAdmin","SignIn")" class="nav-item nav-link">Log out</a>
+        </div>
+    }
+    else
+    {
+        <div class="navbar-nav mr-auto col-sm-12 col-md-3 justify-content-end">
+            <a href="@Url.Action("SignIn", "SignIn")" class="nav-item nav-link" id="loginLink">Log In</a>
+            <a href="@Url.Action("Register", "Account")" class="nav-item nav-link" id="registerLink">Register</a>
+        </div>
+    }
 }

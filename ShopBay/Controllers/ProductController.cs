@@ -22,7 +22,11 @@ namespace ShopBay.Controllers
             {
                 var infoSubasta = db.Auction.SqlQuery("SELECT * FROM Auction WHERE ProductID =" + id).First();
                 ViewBag.auctionEnd = infoSubasta.EndDate;
-                product.Price = db.BidList.SqlQuery("SELECT * FROM BidList WHERE AuctionID = " + infoSubasta.AuctionID).ToList().Last().Bid;
+                var allBids = db.BidList.SqlQuery("SELECT * FROM BidList WHERE AuctionID = " + infoSubasta.AuctionID).ToList();
+                if(allBids.Count != 0)
+                {
+                    product.Price = allBids.Last().Bid;
+                }
                 ViewBag.preciominimo = product.Price+100;
             }
             return View(product);

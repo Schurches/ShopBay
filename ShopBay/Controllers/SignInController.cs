@@ -22,29 +22,50 @@ namespace ShopBay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ValidarLogin(Users usuario)
         {
-            var user = bd.Users.ToList();
-            foreach (var item in user)
+            if(usuario.Username.Equals("Steven") || usuario.Username.Equals("Andres") || usuario.Username.Equals("Jonathan"))
             {
-                if(item.Username == usuario.Username)
+                if (usuario.Username.Equals(usuario.Password))
                 {
-                    if (item.Password.Equals(usuario.Password))
-                    {
-                        FormsAuthentication.SetAuthCookie(usuario.Username, true);
-                        Session["UserID"] = item.UserID;
-                        Session["Username"] = item.Username;
-                        Session["Type"] = item.Type;
-                        Session["Telephone"] = item.Telephone;
-                        Session["Rate"] = item.Rate;
-                        Session["Mail"] = item.Mail;
-                        Session["Information"] = item.Information;
-                        Session["AccMoney"] = item.AccMoney;
-                        Session["Image"] = item.Image;
-                        return RedirectToAction("Index", "Home");
-                    }
+                    Session["isAdmin"] = "yes";
+                    Session["AdminName"] = usuario.Username;
+                    return RedirectToAction("Admin", "Admin");
+                }else
+                {
+                    return View();
                 }
-                ModelState.AddModelError("", "Wrong username or password");
+            }else
+            {
+                var user = bd.Users.ToList();
+                foreach (var item in user)
+                {
+                    if (item.Username == usuario.Username)
+                    {
+                        if (item.Password.Equals(usuario.Password))
+                        {
+                            FormsAuthentication.SetAuthCookie(usuario.Username, true);
+                            Session["UserID"] = item.UserID;
+                            Session["Username"] = item.Username;
+                            Session["Type"] = item.Type;
+                            Session["Telephone"] = item.Telephone;
+                            Session["Rate"] = item.Rate;
+                            Session["Mail"] = item.Mail;
+                            Session["Information"] = item.Information;
+                            Session["AccMoney"] = item.AccMoney;
+                            Session["Image"] = item.Image;
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+                    ModelState.AddModelError("", "Wrong username or password");
+                }
             }
             return View();    
+        }
+
+        public ActionResult SalirAdmin()
+        {
+            Session["isAdmin"] = null;
+            Session["AdminName"] = null;
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Salir()
