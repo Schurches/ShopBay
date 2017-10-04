@@ -12,22 +12,18 @@ namespace ShopBay.Controllers
     {
         ShopBayEntities1 db = new ShopBayEntities1();
         // GET: Product
-
-
         public ActionResult Product(int id)
         {
             var product = db.Products.Find(id);
             ViewBag.Seller = db.Users.Find(product.UserID);
             ViewBag.isAuction = product.isAuction;
-            var executedQuery = db.ProductCategory.SqlQuery("SELECT * FROM ProductCategory WHERE ProductID = " + id).Single();
-            ViewBag.productInstance = product;
-            foreach (var item in db.Category)
+            ViewBag.Category = db.ProductCategory.SqlQuery("SELECT * FROM ProductCategory WHERE ProductID = " + id).Single().Category;
+            if (product.isAuction == 1)
             {
-                if(item.CategoryID == executedQuery.CategoryID)
-                {
-                    ViewBag.Category = item;
-                    return View(product);
-                }
+                var infoSubasta = db.Auction.SqlQuery("SELECT * FROM Auction WHERE ProductID =" + id).First();
+                ViewBag.auctionEnd = infoSubasta.EndDate;
+                product.Price = db.BidList.SqlQuery("SELECT * FROM BidList WHERE AuctionID = " + infoSubasta.AuctionID).ToList().Last().Bid;
+                ViewBag.preciominimo = product.Price+100;
             }
             return View(product);
         }
@@ -35,15 +31,25 @@ namespace ShopBay.Controllers
         [HttpPost]
         public ActionResult BuyProduct(Products prod)
         {
-            if(Session["UserID"] != null)
+            if (Session["UserID"] != null)
             {
                 if (prod.isAuction == 1)
                 {
                     //Si aun queda tiempo de la subasta
-                    int 
-                    if (prod.Price >= )
+                    var subasta = db.Auction.SqlQuery("SELECT * FROM Auction WHERE ProductID =" + prod.ProductID).First();
+                    var currentBid = db.BidList.SqlQuery("SELECT * FROM BidList WHERE AuctionID = " + subasta.AuctionID).ToList().Last();
+                    int userBid = Convert.ToInt32(Request.Form["auctionBID"]);
+                    if (userBid >= currentBid.Bid+100)
                     {
-
+                        BidList newBid = new BidList();
+                        newBid.BidID = db.BidList.Count() + 1;
+                        newBid.AuctionID = currentBid.AuctionID;
+                        newBid.UserID = Convert.ToInt32(Session["UserID"]);
+                        newBid.Bid = userBid;
+                        db.BidList.Add(newBid);
+                        db.Products.Find(prod.ProductID).Price = userBid;
+                        db.SaveChanges();
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                 else
@@ -102,7 +108,7 @@ namespace ShopBay.Controllers
                         quantity = 1;
                     }
                 }
-                
+
             }
             return View();
         }

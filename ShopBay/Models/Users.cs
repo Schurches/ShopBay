@@ -32,7 +32,7 @@ namespace ShopBay.Models
         [Required(ErrorMessage = "Enter your username", AllowEmptyStrings = false)]
         [Display(Name = "Username")]
         [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Username must NOT contain white spaces or @")]
-        [StringLength(50, ErrorMessage = "The username must be at least {2} characters long.", MinimumLength = 3)]
+        [StringLength(50, ErrorMessage = "The username must be at least {2} characters long.", MinimumLength = 2)]
         public string Username { get; set; }
         [Required(ErrorMessage = "Enter your name", AllowEmptyStrings = false)]
         [Display(Name = "Name")]

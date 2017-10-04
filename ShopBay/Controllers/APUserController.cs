@@ -28,7 +28,7 @@ namespace ShopBay.Controllers
                 newProduct.ProductID = db.Products.ToList().Last().ProductID + 1;
                 newProduct.Rate = 0;
                 newProduct.isAuction = 0;
-                newProduct.UserID = 1;
+                newProduct.UserID = Convert.ToInt32(Session["UserID"]);
                 if (Request.Form["selectType"].Equals("Aution"))
                 {
                     Auction newAution = new Auction();
